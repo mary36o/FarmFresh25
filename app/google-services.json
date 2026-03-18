@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1089158847080",
+    "project_id": "farmfresh25-83889",
+    "storage_bucket": "farmfresh25-83889.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089158847080:android:54699bb40f86d05dbef9dd",
+        "android_client_info": {
+          "package_name": "com.demo.farmfresh25"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfwgfu0z4zR_q1du9BBrzienlEL96A48I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
