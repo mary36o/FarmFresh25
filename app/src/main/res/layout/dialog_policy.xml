@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/titlePolicy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FarmFresh Policy"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/textPolicy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• All products are sourced from verified farmers.\n\n• Prices may vary based on season and availability.\n\n• No refund after delivery.\n\n• Delivery within 24–48 hours.\n\n• Users must provide accurate delivery details.\n\n• Payments are secure and protected.\n\n• By using this app, you agree to our terms and conditions."
+                android:textSize="14sp"/>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>

@@ -48,8 +48,13 @@ dependencies {
     implementation(libs.fragment)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.billing)
+    implementation(libs.cardview)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 }

@@ -2,14 +2,29 @@ package com.demo.farmfresh25.Authentification;
 
 import static android.content.ContentValues.TAG;
 
+import static java.security.AccessController.getContext;
+
+import android.content.Context;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -35,12 +50,17 @@ public class Register extends AppCompatActivity {
     MaterialButton btnRegister;
     TextView txtLogin;
 
+    CheckBox checkBox;
+
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+
+
 
 //        Initialize Firebase Auth
                 mAuth = FirebaseAuth.getInstance();
@@ -50,6 +70,7 @@ public class Register extends AppCompatActivity {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         edtConfirmPassword = findViewById(R.id.edtConfirmPassword);
+        checkBox = findViewById(R.id.checkBox);
 
         btnRegister = findViewById(R.id.btnRegister);
         txtLogin = findViewById(R.id.txtLogin);
@@ -57,10 +78,13 @@ public class Register extends AppCompatActivity {
         // Register Button Click
         btnRegister.setOnClickListener(v -> {
 
+
                     String name = edtName.getText().toString().trim();
                     String email = edtEmail.getText().toString().trim();
                     String password = edtPassword.getText().toString().trim();
                     String confirmPassword = edtConfirmPassword.getText().toString().trim();
+                    boolean isChecked = checkBox.isChecked();
+
 
                     if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 
@@ -72,6 +96,12 @@ public class Register extends AppCompatActivity {
                         Toast.makeText(Register.this,
                                 "Passwords do not match", Toast.LENGTH_SHORT).show();
                     } else {
+
+                       if(!isChecked){
+                           Toast.makeText(this, "please accept the terms and conditions", Toast.LENGTH_SHORT).show();
+                           return;
+                       }
+
 
                         mAuth.createUserWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -109,6 +139,9 @@ public class Register extends AppCompatActivity {
                                 });
                     }
                 });
+
+
+
         // Go to Login Page
         txtLogin.setOnClickListener(v -> {
             Intent intent = new Intent(Register.this, Login.class);
@@ -117,7 +150,12 @@ public class Register extends AppCompatActivity {
         });
 }
 
+public void policyTerms(View v){
 
+    showPolicyDialog();
+
+
+}
     private void saveUserData(String uid, String name, String cPass){
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -159,4 +197,55 @@ public class Register extends AppCompatActivity {
     }
 
 
+
+    private void showPolicyDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_policy, null);
+
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.setCancelable(false); // user must accept
+        dialog.show();
+
+
+        Button btnAccept = view.findViewById(R.id.btnAccept);
+
+        btnAccept.setOnClickListener(v -> {
+
+
+            Toast.makeText(this, "accept the policy", Toast.LENGTH_SHORT).show();
+
+            checkBox.setChecked(true);
+            dialog.dismiss();
+        });
+
+
+
+    }
+
+
+    ClickableSpan clickableSpan = new ClickableSpan(){
+        @Override
+        public void onClick(@NonNull View widget) {
+            Toast.makeText(Register.this, "Terms and Conditions", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+//
+//        btnRegister.setOnClickListener(new View.OnClickListener() {
+//            if(!checkBox.isChecked()){
+//            Toast.makeText(this, "please accept the terms and conditions", Toast.LENGTH_SHORT).show();
+//    }
+
+//}
+
+
+
 }
+
+
+

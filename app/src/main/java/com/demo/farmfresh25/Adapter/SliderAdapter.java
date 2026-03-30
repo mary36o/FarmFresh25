@@ -1,4 +1,4 @@
-package com.demo.farmfresh25;
+package com.demo.farmfresh25.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.demo.farmfresh25.R;
 
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.ViewHolder>{
 

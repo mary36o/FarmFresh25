@@ -11,13 +11,13 @@
 
 
 <!--    my_light_primary-->
+    <color name="my_light_primary">#13EC5B</color>
 
-    <color name="my_light_primary">#13B84A</color>
 
 
 
 <!--    my_dark_primary-->
-    <color name="my_dark_primary">#171A18</color>
+    <color name="my_blue_primary">#171A18</color>
 
 
 

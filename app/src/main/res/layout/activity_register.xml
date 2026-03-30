@@ -36,7 +36,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
-                    android:src="@android:drawable/ic_notification_overlay" />
+                    android:src="@drawable/close_up" />
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Title -->
@@ -46,6 +46,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:text="Join Farm Fresh"
+                android:textColor="#4CAF50"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -54,15 +55,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="32dp"
+                android:shadowColor="#5CCA60"
                 android:text="Create your account to start buying from farmers"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
             <!-- Full Name -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
-
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
@@ -145,11 +146,26 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Register Button -->
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CheckBox" />
+
+            <TextView
+                android:id="@+id/txtTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="policyTerms"
+                android:text="I understand and agree to the Farm Fresh Terms and Conditions and privacy policy"
+                android:textColor="#4CAF50"
+                android:textSize="20sp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnRegister"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="Create Account"
                 android:textStyle="bold"
                 app:cornerRadius="16dp" />
@@ -160,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="Already have an account? Login"
                 android:textColor="#11D452"
                 android:textSize="20dp"

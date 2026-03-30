@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,8 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.FarmFresh25">
+
         <activity
-            android:name=".ForgotPassword"
+            android:name=".Addproduct"
+            android:exported="false" />
+
+        <activity
+            android:name=".Category"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
             android:exported="false" />
         <activity
             android:name=".DashboardActivity"
@@ -21,20 +31,17 @@
             android:name=".SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".productList"
-            android:exported="false" />
-        <activity
             android:name=".ProductDetails"
             android:exported="false" />
         <activity
-            android:name=".Authentification.Register"
+            android:name=".ForgotPassword"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".Home"
+            android:name=".Authentification.Login"
             android:exported="false" />
         <activity
-            android:name=".Authentification.Login"
+            android:name=".Authentification.Register"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
