@@ -41,7 +41,7 @@ public class ProductDetails extends AppCompatActivity {
         String productId = getIntent().getStringExtra("productId");
 
         databaseReference = FirebaseDatabase.getInstance()
-                .getReference("products")
+                .getReference("sub_product")
                 .child(productId);
 
         loadProduct();

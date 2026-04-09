@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Addproduct extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,26 +25,37 @@ public class Addproduct extends AppCompatActivity {
 
     }
 
-    public void addNewProduct(View view){
-
-
+    public void addNewProduct(View view) {
         TextInputEditText edittextname = findViewById(R.id.edittextname);
         TextInputEditText edittextprice = findViewById(R.id.edittextprice);
         TextInputEditText edittextimageurl = findViewById(R.id.edittextimageurl);
+        TextInputEditText edittextcategory = findViewById(R.id.edittextcategory);
+
 
         String name = edittextname.getText().toString();
         String price = edittextprice.getText().toString();
         String image = edittextimageurl.getText().toString();
+        String category = edittextcategory.getText().toString();
 
-        ProductModel product = new ProductModel(name, price, image, "    " );
+        if (name.isEmpty() || price.isEmpty() || image.isEmpty() || category.isEmpty()) {
+            Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        db.collection("products")
-                .add(product)
+
+        String productId = db.collection("sub_product").document().getId();
+
+        ProductModel product = new ProductModel(productId, name, price, image, category);
+
+        db.collection("sub_product")
+                .document(productId)  // Use your generated ID
+                .set(product)         // ✅ Use .set() instead of .add()
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Product Added", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
+
 }

@@ -38,10 +38,10 @@
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".Authentification.Login"
+            android:name=".Authentification.Register"
             android:exported="false" />
         <activity
-            android:name=".Authentification.Register"
+            android:name=".Authentification.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

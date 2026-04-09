@@ -25,5 +25,14 @@
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="DashBoard" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/nav_item"
+            android:title="Item" />
+
     </group>
 </menu>

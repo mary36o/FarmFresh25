@@ -18,6 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.demo.farmfresh25.Addproduct;
 import com.demo.farmfresh25.ForgotPassword;
 import com.demo.farmfresh25.Home;
 import com.demo.farmfresh25.R;
@@ -134,6 +135,12 @@ public class Login extends AppCompatActivity {
     public void ForgotPass(View view) {
 
         Intent intent = new Intent(this, ForgotPassword.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void button (View view){
+        Intent intent = new Intent(Login.this, Addproduct.class);
         startActivity(intent);
         finish();
     }

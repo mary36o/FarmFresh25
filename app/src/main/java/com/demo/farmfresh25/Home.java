@@ -21,9 +21,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.demo.farmfresh25.Authentification.Login;
 import com.demo.farmfresh25.DashBoard.DashBoard;
 import com.demo.farmfresh25.ProductItem.ProductItem;
+import com.demo.farmfresh25.Profile.Profile;
 import com.demo.farmfresh25.ShoppingCart.ShoppingCart;
 import com.demo.farmfresh25.databinding.ActivityHomeBinding;
 
+import com.demo.farmfresh25.ui.ItemFragment;
 import com.demo.farmfresh25.ui.gallery.GalleryFragment;
 import com.demo.farmfresh25.ui.home.HomeFragment;
 import com.demo.farmfresh25.ui.slideshow.SlideshowFragment;
@@ -32,7 +34,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
-
 
 
     ActivityHomeBinding binding;
@@ -114,29 +115,44 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
         } else if (R.id.nav_gallery == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new GalleryFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_gallery);
-//            Toast.makeText(this, "Gallery", Toast.LENGTH_SHORT).show();
-
 
 
         }else if (R.id.nav_dashboard == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new DashBoard()).commit();
             navigationView.setCheckedItem(R.id.nav_dashboard);
-//            Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
+
 
         }else if (R.id.nav_productitem == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new ProductItem ()).commit();
             navigationView.setCheckedItem(R.id.nav_productitem);
-//            Toast.makeText(this, "Product Items", Toast.LENGTH_SHORT).show();
+
+
+
+        setContentView(binding.getRoot());
+
+        toolbar = binding.appBarHome.toolbar;
+        setSupportActionBar(toolbar);
+        drawer = binding.drawerLayout;
+        navigationView = binding.navView;
 
 
         }else if (R.id.nav_shoppingcart == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new ShoppingCart()).commit();
             navigationView.setCheckedItem(R.id.nav_shoppingcart);
-//            Toast.makeText(this, "Shopping Cart", Toast.LENGTH_SHORT).show();
 
+        }else if (R.id.nav_profile == item.getItemId()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new Profile()).commit();
+            navigationView.setCheckedItem(R.id.nav_profile);
+        }
+
+        else if (R.id.nav_item== item.getItemId()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new ItemFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_item);
 
 
         }
+
+
 //        else if (R.id.nav_productitem == item.getItemId()) {
 //            FirebaseAuth.getInstance().signOut();
 //            Intent intent = new Intent(this, LoginEsp32.class);
