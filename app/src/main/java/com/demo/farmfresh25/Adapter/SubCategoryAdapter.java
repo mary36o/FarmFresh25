@@ -42,24 +42,25 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        productModel = list.get(position);
-//        holder.imageView.setImageResource(images[position]);
+
+        ProductModel productModel = list.get(position);
+
         Glide.with(context)
                 .load(productModel.getImage())
                 .into(holder.image);
+
         holder.name.setText(productModel.getName());
         holder.price.setText(productModel.getPrice());
         holder.description.setText(productModel.getDescription());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ProductDetails.class);
-                intent.putExtra("productId", productModel.getId());
-                context.startActivity(intent);
-                Toast.makeText(context, "Hiiiiiiiiiiiiiiiiiii", Toast.LENGTH_SHORT).show();
-            }
 
+        holder.cardView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ProductDetails.class);
+            intent.putExtra("productId", productModel.getId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // important
 
+            context.startActivity(intent);
+
+            Toast.makeText(context, "Opening product...", Toast.LENGTH_SHORT).show();
         });
     }
 

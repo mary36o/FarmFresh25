@@ -111,8 +111,6 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
 
 
                                             list.add(product);
-
-
                                     } else {
                                         Log.w(TAG, "Skipping invalid product: " + doc.getId());
                                     }
@@ -163,7 +161,7 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
         intent.putExtra("category", productModel.getCategory());
         startActivity(intent);
 
-        Toast.makeText(getContext(), productModel.getImage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), productModel.getCategory(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
