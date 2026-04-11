@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -25,6 +26,7 @@ public class ShoppingCart extends Fragment {
     CartAdapter adapter;
 
     RecyclerView recyclerView;
+    TextView totalPrice;
 
     public ShoppingCart() {
         // Required empty constructor
@@ -39,6 +41,8 @@ public class ShoppingCart extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        totalPrice = view.findViewById(R.id.totalPrice);
+
         db = FirebaseFirestore.getInstance();
         cartList = new ArrayList<>();
 
@@ -48,6 +52,7 @@ public class ShoppingCart extends Fragment {
         loadCart();
 
         return view;
+
     }
 
     private void loadCart() {
@@ -75,6 +80,14 @@ public class ShoppingCart extends Fragment {
 
                             cartList.add(new CartModel(name, price, image, quantity));
                         }
+
+                        try {
+                            double priceValue = Double.parseDouble(price);
+                            total += priceValue * quantity;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            // ✅ SHOW TOTAL
+                            totalPrice.setText("Total: GHS " + total);
                     }
 
                     adapter.notifyDataSetChanged();
@@ -83,6 +96,10 @@ public class ShoppingCart extends Fragment {
                         Toast.makeText(requireContext(),
                                 "Cart is empty", Toast.LENGTH_SHORT).show();
                     }
+
+
                 });
+
+
     }
 }
