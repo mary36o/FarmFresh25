@@ -23,6 +23,8 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+
+
         <TextView
             android:id="@+id/detailPrice"
             android:text="GHS 10"

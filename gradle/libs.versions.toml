@@ -20,6 +20,7 @@ cardview = "1.0.0"
 recyclerview = "1.4.0"
 legacySupportV4 = "1.0.0"
 cameraCamera2Pipe = "1.6.0"
+remoteCreationCore = "1.0.0-alpha07"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -40,6 +41,7 @@ billing = { group = "com.android.billingclient", name = "billing", version.ref =
 cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+remote-creation-core = { group = "androidx.compose.remote", name = "remote-creation-core", version.ref = "remoteCreationCore" }
 
 
 [plugins]

@@ -60,8 +60,6 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-
-
 //        Initialize Firebase Auth
                 mAuth = FirebaseAuth.getInstance();
 

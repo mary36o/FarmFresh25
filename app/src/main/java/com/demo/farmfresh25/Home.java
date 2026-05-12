@@ -1,14 +1,11 @@
 package com.demo.farmfresh25;
 
-import static androidx.fragment.app.FragmentManagerKt.commit;
-
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,9 +23,8 @@ import com.demo.farmfresh25.ShoppingCart.ShoppingCart;
 import com.demo.farmfresh25.databinding.ActivityHomeBinding;
 
 import com.demo.farmfresh25.ui.ItemFragment;
-import com.demo.farmfresh25.ui.gallery.GalleryFragment;
+import com.demo.farmfresh25.ui.checkout.CheckOutFragment;
 import com.demo.farmfresh25.ui.home.HomeFragment;
-import com.demo.farmfresh25.ui.slideshow.SlideshowFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -94,7 +90,7 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
             startActivity(intent);
             finish();
 
-        } else if (R.id.nav_gallery == item.getItemId()) {
+        } else if (R.id.nav_checkout== item.getItemId()) {
 
         }
 
@@ -112,9 +108,9 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
 //            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
 
 
-        } else if (R.id.nav_gallery == item.getItemId()) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new GalleryFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_gallery);
+        } else if (R.id.nav_checkout == item.getItemId()) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,new CheckOutFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_checkout);
 
 
         }else if (R.id.nav_dashboard == item.getItemId()) {

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.demo.farmfresh25.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.List;
 
 // Replace 'Object' with your specific Cart Item model class if you have one
@@ -28,6 +30,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         // Bind your data here
+
+        holder.deleteBtn.setOnClickListener(v -> {
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection("cart")
+                    .document(cartList.get(position).getId())
+                    .delete();
+        });
     }
 
     @Override
@@ -36,8 +47,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     static class CartViewHolder extends RecyclerView.ViewHolder {
+        public View deleteBtn;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
         }
     }
 }
+
+
+
+
+

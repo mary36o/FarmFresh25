@@ -22,7 +22,6 @@ public class Addproduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_addproduct);
-
     }
 
     public void addNewProduct(View view) {
@@ -42,7 +41,6 @@ public class Addproduct extends AppCompatActivity {
             return;
         }
 
-
         String productId = db.collection("sub_product").document().getId();
 
         ProductModel product = new ProductModel(productId, name, price, image, category);
@@ -57,5 +55,4 @@ public class Addproduct extends AppCompatActivity {
                     Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
-
 }
