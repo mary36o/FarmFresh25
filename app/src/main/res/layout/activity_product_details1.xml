@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Product Image Section -->
+        <!-- Product Image Section -->--
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -334,16 +334,15 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buyNow"
-                android:layout_width="0dp"
-                android:layout_height="52dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:layout_weight="1"
                 android:text="BUY NOW"
                 android:textAllCaps="true"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
-                app:cornerRadius="10dp"
+                app:cornerRadius="12dp"
                 app:backgroundTint="@color/error_color"
-                android:layout_marginStart="8dp"
                 android:stateListAnimator="@null" />
 
         </LinearLayout>

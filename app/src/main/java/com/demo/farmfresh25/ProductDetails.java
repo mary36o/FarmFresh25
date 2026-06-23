@@ -128,9 +128,9 @@ public class ProductDetails extends AppCompatActivity {
     }
 
     private void updateTotalPrice() {
-        String currentPrice = price.getText().toString();
+        String currentPrice = productPrice;
         if (!currentPrice.isEmpty() && !currentPrice.equals("GHS 0.00")) {
-            String priceStr = currentPrice.replace("GHS ", "");
+            String priceStr = currentPrice;
             try {
                 double singlePrice = Double.parseDouble(priceStr);
                 double totalPrice = singlePrice * quantity;
