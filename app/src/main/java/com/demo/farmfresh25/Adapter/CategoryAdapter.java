@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.demo.farmfresh25.Interface.CategoryInterface;
+import com.demo.farmfresh25.Model.Category;
 import com.demo.farmfresh25.Model.ProductModel;
 import com.demo.farmfresh25.R;
 import com.demo.farmfresh25.databinding.CustomCategoryCardBinding;
@@ -33,6 +34,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.categroyinterface = categroyinterface;
     }
 
+    public CategoryAdapter(Context context, ArrayList<Category> categoryList) {
+    }
+
+//    public CategoryAdapter(Context context, ArrayList<Category> categoryList) {
+//    }
+
+   
 
 
     @NonNull

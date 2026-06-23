@@ -1,4 +1,4 @@
-//package com.demo.farmfresh25;
+package com.demo.farmfresh25;
 //
 //import android.os.Bundle;
 //
@@ -30,8 +30,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.farmfresh25.Adapter.CartAdapter;
-import com.demo.farmfresh25.CartManager;
-import com.demo.farmfresh25.R;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -40,7 +38,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_shopping_cart);
+        setContentView(R.layout.activity_shopping_cart);
 
         recyclerView = findViewById(R.id.recyclerCart);
 

@@ -21,6 +21,9 @@ recyclerview = "1.4.0"
 legacySupportV4 = "1.0.0"
 cameraCamera2Pipe = "1.6.0"
 remoteCreationCore = "1.0.0-alpha07"
+litertSupportApi = "1.4.2"
+gamesActivity = "4.4.2"
+engageCore = "1.6.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,6 +45,9 @@ cardview = { group = "androidx.cardview", name = "cardview", version.ref = "card
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 remote-creation-core = { group = "androidx.compose.remote", name = "remote-creation-core", version.ref = "remoteCreationCore" }
+litert-support-api = { group = "com.google.ai.edge.litert", name = "litert-support-api", version.ref = "litertSupportApi" }
+games-activity = { group = "androidx.games", name = "games-activity", version.ref = "gamesActivity" }
+engage-core = { group = "com.google.android.engage", name = "engage-core", version.ref = "engageCore" }
 
 
 [plugins]

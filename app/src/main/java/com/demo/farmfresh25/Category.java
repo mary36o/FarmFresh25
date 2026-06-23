@@ -31,11 +31,19 @@ public class Category extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<ProductModel> list2;
 
+//    public Category(String id, String name, String image, String color) {
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_category);
+
+        if (getIntent() != null && getIntent().hasExtra("category")) {
+            String categoryName = getIntent().getStringExtra("category");
+            // Use categoryName to filter your data or update UI
+        }
 
         SearchView searchView = findViewById(R.id.SubCategorySearch);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

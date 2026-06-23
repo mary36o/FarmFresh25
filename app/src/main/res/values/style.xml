@@ -4,4 +4,9 @@
         <item name="colorPrimary">#11D452</item>
     </style>
 
+    <!-- Dropdown Menu Style -->
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="endIconMode">dropdown_menu</item>
+    </style>
+
 </resources>

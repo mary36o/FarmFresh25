@@ -1,7 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.FarmFresh25" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/my_light_primary</item>
+
+    <!-- Dark theme -->
+    <style name="Theme.FarmFresh25" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/green_dark</item>
+        <item name="colorPrimaryVariant">@color/primary_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/green_light</item>
+        <item name="colorSecondaryVariant">@color/primary_green</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/green_dark</item>
+
+        <!-- Background color -->
+        <item name="android:windowBackground">@color/black</item>
+
+        <!-- Surface color -->
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <!-- Error color -->
+        <item name="colorError">@color/error_color</item>
+        <item name="colorOnError">@color/white</item>
+    </style>
+
+    <!-- AppBarOverlay style for dark mode -->
+    <style name="Theme.FarmFresh25.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <!-- PopupOverlay style for dark mode -->
+    <style name="Theme.FarmFresh25.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
     </style>
 </resources>

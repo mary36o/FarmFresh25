@@ -7,6 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,33 +25,32 @@
             <!-- TEXT -->
 
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/constraintLayout2"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="24dp"-->
-<!--        android:background="@drawable/ic_search"-->
-<!--        android:textAlignment="center"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">-->
+            <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--        android:id="@+id/constraintLayout2"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="50dp"-->
+            <!--        android:layout_marginStart="24dp"-->
+            <!--        android:layout_marginTop="20dp"-->
+            <!--        android:layout_marginEnd="24dp"-->
+            <!--        android:background="@drawable/ic_search"-->
+            <!--        android:textAlignment="center"-->
+            <!--        app:layout_constraintEnd_toEndOf="parent"-->
+            <!--        app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">-->
 
-<!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;            android:id="@+id/imageView"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_height="13dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_marginTop="16dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:layout_marginEnd="48dp"&ndash;&gt;-->
-<!--&lt;!&ndash;            android:textAlignment="center"&ndash;&gt;-->
-<!--&lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;            app:srcCompat="@drawable/ic_search_black_24dp" />&ndash;&gt;-->
+            <!--&lt;!&ndash;        <ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:id="@+id/imageView"&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:layout_height="13dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:layout_marginTop="16dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:layout_marginEnd="48dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;            android:textAlignment="center"&ndash;&gt;-->
+            <!--&lt;!&ndash;            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;            app:layout_constraintTop_toTopOf="parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;            app:srcCompat="@drawable/ic_search_black_24dp" />&ndash;&gt;-->
 
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
+            <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
             <TextView
@@ -75,6 +75,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
@@ -95,4 +96,15 @@
 
 
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="100dp"
+        android:clickable="true"
+        android:src="@drawable/assignment_return_24dp_000000_fill0_wght400_grad0_opsz24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Missing Colors from Error Log -->
+    <color name="my_blue_primary">#2196F3</color>
+    <color name="primary">#2E7D32</color>
+    <color name="border_light">#E0E0E0</color>
+    <color name="background_light">#F5F5F5</color>
+    <color name="text_primary">#212121</color>
 
-    <color name="primary">#13EC5B</color>
-    <color name="background_light">#F6F8F6</color>
-    <color name="background_dark">#102216</color>
-    <color name="text_primary">#0D1B12</color>
-    <color name="border_light">#CFE7D7</color>
+    <!-- Your Green Theme Colors -->
+    <color name="primary_green">#2E7D32</color>
+    <color name="green_light">#4CAF50</color>
+    <color name="green_dark">#1B5E20</color>
+    <color name="green_price">#388E3C</color>
 
+    <!-- Material Theme Colors -->
+    <color name="my_light_primary">#2E7D32</color>
+    <color name="my_dark_primary">#1B5E20</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
-<!--    my_light_primary-->
-    <color name="my_light_primary">#13EC5B</color>
+    <!-- Supporting Colors -->
+    <color name="background_color">#F5F5F5</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="divider_color">#E0E0E0</color>
+    <color name="success_color">#4CAF50</color>
+    <color name="error_color">#D32F2F</color>
 
+    <!-- App Colors -->
+    <color name="colorPrimary">#2E7D32</color>
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="colorPrimaryVariant">#388E3C</color>
+    <color name="colorSecondary">#4CAF50</color>
+    <color name="colorSecondaryVariant">#2E7D32</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorError">#D32F2F</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorOnBackground">#000000</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorOnError">#FFFFFF</color>
 
-
-
-<!--    my_dark_primary-->
-    <color name="my_blue_primary">#171A18</color>
-
-
-
-
-
+    <!-- Status Bar Colors -->
+    <color name="status_bar_color">#2E7D32</color>
+    <color name="navigation_bar_color">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="gradient_start">#2E7D32</color>
+    <color name="gradient_end">#66BB6A</color>
 </resources>
-
-

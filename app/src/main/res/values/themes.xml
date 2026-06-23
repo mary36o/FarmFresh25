@@ -1,14 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.FarmFresh25" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/my_light_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
+
+    <!-- Base application theme -->
+    <style name="Theme.FarmFresh25" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+        <!-- Primary brand color -->
+
+        <!-- Status bar color -->
+
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+
+        <!-- Background color -->
+        <item name="android:windowBackground">@color/background_color</item>
+
+        <!-- Surface color -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <!-- Error color -->
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
+
+        <!-- Toolbar styles -->
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
     </style>
 
+    <!-- AppBarOverlay style (Missing from error) -->
+    <style name="Theme.FarmFresh25.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:colorPrimary">@color/primary</item>
+    </style>
 
+    <!-- PopupOverlay style (Missing from error) -->
+    <style name="Theme.FarmFresh25.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+    </style>
 
-    <style name="Theme.FarmFresh25.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <!-- Button Styles -->
+    <style name="ButtonGreen" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/primary_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
 
-    <style name="Theme.FarmFresh25.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- EditText Styles -->
+    <style name="EditTextGreen" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary_green</item>
+        <item name="hintTextColor">@color/primary_green</item>
+    </style>
+
+    <!-- TextView Styles -->
+    <style name="TextTitle">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextSubtitle">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="LogoutTextStyle" parent="TextAppearance.AppCompat.Menu">
+        <item name="android:textColor">@color/error_color</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

@@ -13,14 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.billingclient.api.ProductDetails;
+//import com.android.billingclient.api.ProductDetails;
 import com.demo.farmfresh25.Adapter.CategoryAdapter;
+import com.demo.farmfresh25.Addproduct;
 import com.demo.farmfresh25.Category;
 import com.demo.farmfresh25.Interface.CategoryInterface;
 import com.demo.farmfresh25.Model.ProductModel;
 import com.demo.farmfresh25.R;
 import com.demo.farmfresh25.Adapter.SliderAdapter;
+import com.demo.farmfresh25.crud.AddProductActivity;
+import com.demo.farmfresh25.crud.ProductListActivity;
 import com.demo.farmfresh25.databinding.FragmentHomeBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -38,6 +42,8 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
     private ArrayList<ProductModel> list;
 
     private FirebaseFirestore db;
+
+    private FloatingActionButton fab;
 
     int[] images = {
             R.drawable.image2,
@@ -68,6 +74,14 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        fab = binding.actionButton;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openAdmin();
+            }
+        });
 
 
         categoryRecyclerView  = binding.categoryRecyclerView;
@@ -140,9 +154,8 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
     }
 
 
-    private void openDetails(String category) {
-        Intent intent = new Intent(getActivity(), ProductDetails.class);
-        intent.putExtra("category", category);
+    private void openAdmin() {
+        Intent intent = new Intent(getActivity(), ProductListActivity.class);
         startActivity(intent);
 
     }

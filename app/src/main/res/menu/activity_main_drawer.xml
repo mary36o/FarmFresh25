@@ -8,31 +8,54 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/outline_add_home_24"
             android:title="@string/menu_home" />
+    </group>
+
+    <group>
         <item
             android:id="@+id/nav_checkout"
             android:icon="@drawable/ic_menu_gallery"
             android:title="CheckOut" />
+    </group>
 
+    <group>
         <item
             android:id="@+id/nav_productitem"
             android:title="ProductItem" />
-        <item
-            android:id="@+id/nav_shoppingcart"
-            android:icon="@drawable/outline_add_shopping_cart_24"
-            android:title="ShoppingCart" />
+    </group>
 
+<!--    <group android:checkableBehavior="single">-->
+<!--        <item-->
+<!--            android:id="@+id/nav_shoppingcart"-->
+
+<!--            android:icon="@drawable/outline_add_shopping_cart_24"-->
+<!--            android:title="ShoppingCart" />-->
+
+<!--    </group>-->
+
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="DashBoard" />
+    </group>
 
+    <group>
         <item
             android:id="@+id/nav_profile"
             android:title="Profile" />
+    </group>
 
+<!--    <group>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_item"-->
+<!--            android:title="Item" />-->
+<!--    </group>-->
+
+    <group>
         <item
-            android:id="@+id/nav_item"
-            android:title="Item" />
-
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout"
+            android:iconTint="@color/error_color" />
     </group>
 </menu>
