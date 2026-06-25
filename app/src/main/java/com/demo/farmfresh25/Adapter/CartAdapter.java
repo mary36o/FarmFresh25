@@ -1,6 +1,6 @@
 package com.demo.farmfresh25.Adapter;
 
-import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.db = FirebaseFirestore.getInstance();
     }
 
-    // Constructor with listener
     public CartAdapter(List<CartModel> cartList, OnCartItemChangedListener listener) {
         this.cartList = cartList;
         this.listener = listener;
@@ -52,91 +51,136 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        CartModel item = cartList.get(position);
+        if (cartList == null || cartList.isEmpty()) {
+            return;
+        }
 
-        holder.productName.setText(item.getName());
-        holder.productPrice.setText(String.format("GHS %s", item.getPrice()));
-        holder.productQuantity.setText(String.valueOf(item.getQuantity()));
+        CartModel item = cartList.get(position);
+        if (item == null) {
+            return;
+        }
+
+        // Set data with null checks
+        if (holder.productName != null) {
+            holder.productName.setText(item.getName() != null ? item.getName() : "Unknown Product");
+        }
+
+        if (holder.productPrice != null) {
+            holder.productPrice.setText(String.format("GHS %s", item.getPrice() != null ? item.getPrice() : "0.00"));
+        }
+
+        if (holder.productQuantity != null) {
+            holder.productQuantity.setText(String.valueOf(item.getQuantity()));
+        }
 
         // Calculate total for this item
-        try {
-            double price = Double.parseDouble(item.getPrice());
-            double total = price * item.getQuantity();
-            holder.itemTotal.setText(String.format("GHS %.2f", total));
-        } catch (Exception e) {
-            holder.itemTotal.setText(String.format("GHS %s", item.getPrice()));
+        if (holder.itemTotal != null) {
+            try {
+                String priceStr = item.getPrice();
+                if (priceStr != null && !priceStr.isEmpty()) {
+                    double price = Double.parseDouble(priceStr);
+                    double total = price * item.getQuantity();
+                    holder.itemTotal.setText(String.format("GHS %.2f", total));
+                } else {
+                    holder.itemTotal.setText("GHS 0.00");
+                }
+            } catch (Exception e) {
+                holder.itemTotal.setText("GHS 0.00");
+            }
         }
 
         // Load image using Glide
-        Glide.with(holder.itemView.getContext())
-                .load(item.getImage())
-//                .placeholder(R.drawable.placeholder_image)
-//                .error(R.drawable.error_image)
-                .into(holder.productImage);
+        if (holder.productImage != null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(item.getImage() != null ? item.getImage() : "")
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.error_image)
+                    .into(holder.productImage);
+        }
 
-        // Plus button
-        holder.btnPlus.setOnClickListener(v -> {
-            int newQuantity = item.getQuantity() + 1;
-            updateQuantity(item.getId(), newQuantity, position, holder.itemView.getContext());
-        });
-
-        // Minus button
-        holder.btnMinus.setOnClickListener(v -> {
-            if (item.getQuantity() > 1) {
-                int newQuantity = item.getQuantity() - 1;
+        // Plus button - Check if not null first
+        if (holder.btnPlus != null) {
+            holder.btnPlus.setOnClickListener(v -> {
+                int newQuantity = item.getQuantity() + 1;
                 updateQuantity(item.getId(), newQuantity, position, holder.itemView.getContext());
-            } else {
-                // Remove item if quantity is 1 and user clicks minus
-                deleteItem(item.getId(), position, holder.itemView.getContext());
-            }
-        });
+            });
+        }
 
-        // Delete button
-        holder.btnDelete.setOnClickListener(v -> {
-            deleteItem(item.getId(), position, holder.itemView.getContext());
-        });
+        // Minus button - Check if not null first
+        if (holder.btnMinus != null) {
+            holder.btnMinus.setOnClickListener(v -> {
+                if (item.getQuantity() > 1) {
+                    int newQuantity = item.getQuantity() - 1;
+                    updateQuantity(item.getId(), newQuantity, position, holder.itemView.getContext());
+                } else {
+                    deleteItem(item.getId(), position, holder.itemView.getContext());
+                }
+            });
+        }
+
+        // Delete button - Check if not null first
+        if (holder.btnDelete != null) {
+            holder.btnDelete.setOnClickListener(v -> {
+                deleteItem(item.getId(), position, holder.itemView.getContext());
+            });
+        }
     }
 
-    private void updateQuantity(String documentId, int newQuantity, int position, android.content.Context context) {
+    private void updateQuantity(String documentId, int newQuantity, int position, Context context) {
+        if (documentId == null || documentId.isEmpty()) {
+            return;
+        }
+
         db.collection("cart")
                 .document(documentId)
                 .update("quantity", newQuantity)
                 .addOnSuccessListener(aVoid -> {
-                    cartList.get(position).setQuantity(newQuantity);
-                    notifyItemChanged(position);
-                    if (listener != null) {
-                        listener.onCartItemChanged();
+                    if (cartList != null && position < cartList.size()) {
+                        cartList.get(position).setQuantity(newQuantity);
+                        notifyItemChanged(position);
+                        if (listener != null) {
+                            listener.onCartItemChanged();
+                        }
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(context,
-                            "Failed to update quantity", Toast.LENGTH_SHORT).show();
+                    if (context != null) {
+                        Toast.makeText(context, "Failed to update quantity", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
-    private void deleteItem(String documentId, int position, android.content.Context context) {
+    private void deleteItem(String documentId, int position, Context context) {
+        if (documentId == null || documentId.isEmpty()) {
+            return;
+        }
+
         db.collection("cart")
                 .document(documentId)
                 .delete()
                 .addOnSuccessListener(aVoid -> {
-                    cartList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, cartList.size());
-                    if (listener != null) {
-                        listener.onCartItemChanged();
+                    if (cartList != null && position < cartList.size()) {
+                        cartList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, cartList.size());
+                        if (listener != null) {
+                            listener.onCartItemChanged();
+                        }
+                        if (context != null) {
+                            Toast.makeText(context, "Item removed from cart", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    Toast.makeText(context,
-                            "Item removed from cart", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(context,
-                            "Failed to remove item", Toast.LENGTH_SHORT).show();
+                    if (context != null) {
+                        Toast.makeText(context, "Failed to remove item", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
     @Override
     public int getItemCount() {
-        return cartList.size();
+        return cartList != null ? cartList.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -144,17 +188,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         TextView productName, productPrice, productQuantity, itemTotal;
         Button btnPlus, btnMinus, btnDelete;
 
-        @SuppressLint("WrongViewCast")
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            productImage = itemView.findViewById(R.id.cartImage);
-            productName = itemView.findViewById(R.id.cartName);
-            productPrice = itemView.findViewById(R.id.cartPrice);
-            productQuantity = itemView.findViewById(R.id.cartQuantity);
-            itemTotal = itemView.findViewById(R.id.itemTotal);
-            btnPlus = itemView.findViewById(R.id.btnPlus);
-            btnMinus = itemView.findViewById(R.id.btnMinus);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
+            try {
+                productImage = itemView.findViewById(R.id.cartImage);
+                productName = itemView.findViewById(R.id.cartName);
+                productPrice = itemView.findViewById(R.id.cartPrice);
+                productQuantity = itemView.findViewById(R.id.cartQuantity);
+                itemTotal = itemView.findViewById(R.id.itemTotal);
+                btnPlus = itemView.findViewById(R.id.btnPlus);
+                btnMinus = itemView.findViewById(R.id.btnMinus);
+                btnDelete = itemView.findViewById(R.id.btnDelete);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
