@@ -126,6 +126,14 @@ public class EditProductActivity extends AppCompatActivity {
                         if (currentItem != null) {
                             currentItem.setId(productId);
 
+                            if (currentItem.getSellerId() != null
+                                    && !currentItem.getSellerId().equals(sellerId)) {
+                                Toast.makeText(this, "You can only edit your own products",
+                                        Toast.LENGTH_SHORT).show();
+                                finish();
+                                return;
+                            }
+
                             etName.setText(currentItem.getName());
                             etDescription.setText(currentItem.getDescription());
                             etPrice.setText(String.valueOf(currentItem.getPrice()));
@@ -197,6 +205,15 @@ public class EditProductActivity extends AppCompatActivity {
                     fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         String imageUrl = uri.toString();
                         updateItemInFirestore(name, description, price, category, quantity, imageUrl);
+
+                        if (currentImageUrl != null && !currentImageUrl.isEmpty()) {
+                            try {
+                                FirebaseStorage.getInstance()
+                                        .getReferenceFromUrl(currentImageUrl)
+                                        .delete();
+                            } catch (Exception ignored) {
+                            }
+                        }
                     });
                 })
                 .addOnFailureListener(e -> {

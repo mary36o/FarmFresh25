@@ -28,7 +28,16 @@ public class Seller implements Serializable {
     public Seller( ) {
     }
 
-    public Seller(String sellerId, String sellerName, String email, String phone, String imageUrl, String shopName, String shopAddress, long l) {
+    public Seller(String sellerId, String sellerName, String email, String phone,
+                  String imageUrl, String shopName, String shopAddress, long createdAt) {
+        this.id = sellerId;
+        this.name = sellerName;
+        this.email = email;
+        this.phone = phone;
+        this.imageUrl = imageUrl;
+        this.storeName = shopName;
+        this.address = shopAddress;
+        this.createdAt = createdAt;
     }
 
 

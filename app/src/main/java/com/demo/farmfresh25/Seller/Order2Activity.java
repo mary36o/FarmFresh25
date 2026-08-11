@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.demo.farmfresh25.Order;
 import com.demo.farmfresh25.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,10 +28,8 @@ public class Order2Activity extends AppCompatActivity {
     private TextView tvEmptyText;
 
     private FirebaseFirestore db;
-    private FirebaseAuth auth;
     private OrderAdapter adapter;
-    private List<Order> orderList;
-    private String sellerId;
+    private List<OrderModel> orderList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +37,16 @@ public class Order2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
         db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null) {
-            sellerId = auth.getCurrentUser().getUid();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            orderList = new ArrayList<>();
+            initViews();
+            setupRecyclerView();
+            loadOrders();
         } else {
             Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
             finish();
-            return;
         }
-
-        orderList = new ArrayList<>();
-        initViews();
-        setupRecyclerView();
-        loadOrders();
     }
 
     private void initViews() {
@@ -75,7 +68,6 @@ public class Order2Activity extends AppCompatActivity {
         llEmptyState.setVisibility(View.GONE);
 
         db.collection("orders")
-                .whereEqualTo("sellerId", sellerId)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
                     progressBar.setVisibility(View.GONE);
@@ -90,7 +82,7 @@ public class Order2Activity extends AppCompatActivity {
 
                     if (value != null && !value.isEmpty()) {
                         for (QueryDocumentSnapshot doc : value) {
-                            Order order = doc.toObject(Order.class);
+                            OrderModel order = doc.toObject(OrderModel.class);
                             if (order != null) {
                                 order.setOrderId(doc.getId());
                                 orderList.add(order);
@@ -105,11 +97,5 @@ public class Order2Activity extends AppCompatActivity {
                         tvEmptyText.setText("No orders yet");
                     }
                 });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadOrders();
     }
 }

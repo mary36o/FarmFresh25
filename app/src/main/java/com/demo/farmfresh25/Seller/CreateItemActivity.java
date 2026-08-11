@@ -17,9 +17,12 @@ import com.bumptech.glide.Glide;
 import com.demo.farmfresh25.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class CreateItemActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -31,6 +34,8 @@ public class CreateItemActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
     private Uri imageUri;
     private String sellerId;
 
@@ -42,6 +47,8 @@ public class CreateItemActivity extends AppCompatActivity {
         // Initialize Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference("product_images");
 
         // Get seller ID
         if (auth.getCurrentUser() != null) {
@@ -121,7 +128,11 @@ public class CreateItemActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             btnCreateItem.setEnabled(false);
 
-            createItemInFirestore(name, description, price, category, quantity);
+            if (imageUri != null) {
+                uploadImageAndCreateItem(name, description, price, category, quantity);
+            } else {
+                createItemInFirestore(name, description, price, category, quantity, "");
+            }
 
         } catch (NumberFormatException e) {
             Toast.makeText(this, "Please enter valid numbers", Toast.LENGTH_SHORT).show();
@@ -130,8 +141,25 @@ public class CreateItemActivity extends AppCompatActivity {
         }
     }
 
+    private void uploadImageAndCreateItem(String name, String description, double price,
+                                          String category, int quantity) {
+        String fileName = UUID.randomUUID().toString() + ".jpg";
+        StorageReference fileRef = storageRef.child(fileName);
+
+        fileRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot ->
+                        fileRef.getDownloadUrl().addOnSuccessListener(uri ->
+                                createItemInFirestore(name, description, price, category, quantity, uri.toString())))
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    btnCreateItem.setEnabled(true);
+                    Toast.makeText(this, "Failed to upload image: " + e.getMessage(),
+                            Toast.LENGTH_SHORT).show();
+                });
+    }
+
     private void createItemInFirestore(String name, String description, double price,
-                                       String category, int quantity) {
+                                       String category, int quantity, String imageUrl) {
         String id = db.collection("items").document().getId();
 
         Map<String, Object> item = new HashMap<>();
@@ -142,7 +170,7 @@ public class CreateItemActivity extends AppCompatActivity {
         item.put("price", price);
         item.put("category", category);
         item.put("quantity", quantity);
-        item.put("imageUrl", "");
+        item.put("imageUrl", imageUrl != null ? imageUrl : "");
         item.put("timestamp", System.currentTimeMillis());
 
         db.collection("items").document(id)

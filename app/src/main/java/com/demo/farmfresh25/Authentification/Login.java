@@ -19,6 +19,7 @@ import com.demo.farmfresh25.ForgotPassword;
 import com.demo.farmfresh25.Home;
 import com.demo.farmfresh25.R;
 //import com.demo.farmfresh25.Seller.LoginActivity;
+import com.demo.farmfresh25.Seller.LoginActivity4;
 import com.demo.farmfresh25.Seller.RegisterActivity2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -134,7 +135,7 @@ public class Login extends AppCompatActivity {
 
         // Seller Login Button Click - Navigate to Seller Login
         btnSellerLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(Login.this, Login.class);
+            Intent intent = new Intent(Login.this, LoginActivity4.class);
             startActivity(intent);
         });
 

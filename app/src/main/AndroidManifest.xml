@@ -2,10 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Add these permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Add this meta-data -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
@@ -100,36 +99,12 @@
             android:name=".Seller.Order2Activity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <!-- <activity -->
-        <!-- android:name=".Seller.ForgotPasswordActivitySeller" -->
-        <!-- android:exported="false" -->
-        <!-- android:windowSoftInputMode="adjustResize" /> -->
         <!-- Forgot Password Activity - in Seller package -->
         <activity
             android:name=".Seller.ForgotPasswordActivitySeller"
             android:exported="false"
             android:label="Forgot Password"
             android:parentActivityName=".Seller.LoginActivity4" />
-        <!-- <activity -->
-        <!-- android:name=".SellerCart" -->
-        <!-- android:exported="false" -->
-        <!-- android:windowSoftInputMode="adjustResize" /> -->
-        <!-- <activity -->
-        <!-- android:name=".ViewSellers" -->
-        <!-- android:exported="false" -->
-        <!-- android:windowSoftInputMode="adjustResize" /> -->
-        <!-- <activity -->
-        <!-- android:name=".ViewItem" -->
-        <!-- android:exported="false" -->
-        <!-- android:windowSoftInputMode="adjustResize" /> -->
-        <!-- <activity -->
-        <!-- android:name=".Search" -->
-        <!-- android:exported="false" -->
-        <!-- android:windowSoftInputMode="adjustResize" /> -->
-        <activity
-            android:name=".Orders"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Seller.SellerProfileActivity"
             android:exported="false"

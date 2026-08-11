@@ -170,18 +170,33 @@ public class RegisterActivity2 extends AppCompatActivity {
                                 String businessName, String businessAddress) {
 
         Map<String, Object> sellerData = new HashMap<>();
+        sellerData.put("id", userId);
         sellerData.put("userId", userId);
+        sellerData.put("name", fullName);
         sellerData.put("fullName", fullName);
         sellerData.put("email", email);
+        sellerData.put("storeName", businessName);
         sellerData.put("businessName", businessName);
+        sellerData.put("address", businessAddress);
         sellerData.put("businessAddress", businessAddress);
+        sellerData.put("phone", "");
+        sellerData.put("imageUrl", "");
         sellerData.put("role", "seller");
         sellerData.put("isVerified", false);
         sellerData.put("createdAt", System.currentTimeMillis());
 
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("name", fullName);
+        userData.put("email", email);
+        userData.put("role", "seller");
+
         db.collection("sellers")
                 .document(userId)
                 .set(sellerData)
+                .addOnSuccessListener(aVoid ->
+                        db.collection("users")
+                                .document(userId)
+                                .set(userData))
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(RegisterActivity2.this,
                             "Registration successful! Please login.", Toast.LENGTH_LONG).show();

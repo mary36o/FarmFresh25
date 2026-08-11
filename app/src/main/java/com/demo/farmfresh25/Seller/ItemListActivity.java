@@ -123,10 +123,4 @@ public class ItemListActivity extends AppCompatActivity {
                     }
                 });
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadItems();
-    }
 }

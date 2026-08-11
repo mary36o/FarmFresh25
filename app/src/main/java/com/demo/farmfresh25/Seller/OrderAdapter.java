@@ -12,10 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.demo.farmfresh25.Order;
 import com.demo.farmfresh25.R;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firestore.admin.v1.Index;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,20 +32,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         this.db = FirebaseFirestore.getInstance();
     }
 
-//    public OrderAdapter(Order2Activity context, List<Index.IndexField.Order> orderList) {
-//    }
-
-    public OrderAdapter() {
-    }
-
-    public OrderAdapter(Order2Activity order2Activity, List<Order> orderList) {
-    }
-
-
     @NonNull
     @Override
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_order, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.order_item, parent, false);
         return new OrderViewHolder(view);
     }
 
@@ -57,59 +45,40 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         // Set order details
         String orderId = order.getOrderId();
-        if (orderId != null && orderId.length() > 8) {
-            holder.tvOrderId.setText("Order #" + orderId.substring(0, 8));
+        holder.tvOrderId.setText(orderId != null ? "Order #" + orderId : "Order");
+
+        String status = order.getStatus();
+        holder.tvStatus.setText(status != null ? status : "");
+
+        String customerName = order.getCustomerName();
+        holder.tvProductName.setText(customerName != null ? customerName : "Customer");
+
+        String phone = order.getPhone();
+        String email = order.getEmail();
+        if (phone != null && !phone.isEmpty()) {
+            holder.tvBuyerName.setText("Phone: " + phone);
+        } else if (email != null && !email.isEmpty()) {
+            holder.tvBuyerName.setText("Email: " + email);
         } else {
-            holder.tvOrderId.setText("Order #" + orderId);
+            holder.tvBuyerName.setText("");
         }
 
-        holder.tvProductName.setText(order.getProductName());
-        holder.tvBuyerName.setText("Buyer: " + order.getBuyerName());
-        holder.tvQuantity.setText("Qty: " + order.getQuantity());
-        holder.tvTotalPrice.setText("Total: GH₵ " + String.format("%.2f", order.getTotalPrice()));
+        String paymentMethod = order.getPaymentMethod();
+        holder.tvQuantity.setText("Payment: " + (paymentMethod != null ? paymentMethod : "-"));
+
+        holder.tvTotalPrice.setText(String.format("Total: GH₵ %.2f", order.getTotalAmount()));
 
         // Set date
         if (order.getTimestamp() > 0) {
             String date = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                     .format(new Date(order.getTimestamp()));
             holder.tvOrderDate.setText(date);
-        }
-
-        // Set status with color
-        String status = order.getStatus();
-        holder.tvStatus.setText(status);
-
-        // Set status background color
-        switch (status) {
-            case "Pending":
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_light));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.holo_orange_dark));
-                break;
-            case "Accepted":
-            case "Preparing":
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.holo_blue_dark));
-                break;
-            case "Shipped":
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.holo_purple));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.white));
-                break;
-            case "Delivered":
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.holo_green_light));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.holo_green_dark));
-                break;
-            case "Cancelled":
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.holo_red_light));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
-                break;
-            default:
-                holder.tvStatus.setBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
-                holder.tvStatus.setTextColor(context.getResources().getColor(android.R.color.white));
-                break;
+        } else {
+            holder.tvOrderDate.setText("");
         }
 
         // Show action buttons only for pending orders
-        if (status.equals("Pending")) {
+        if ("Pending".equals(status)) {
             holder.llActions.setVisibility(View.VISIBLE);
             holder.btnAccept.setOnClickListener(v -> updateOrderStatus(order, "Accepted"));
             holder.btnReject.setOnClickListener(v -> updateOrderStatus(order, "Cancelled"));
@@ -146,19 +115,19 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     public static class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView tvOrderId, tvProductName, tvBuyerName, tvQuantity, tvTotalPrice, tvOrderDate, tvStatus;
+        TextView tvOrderId, tvStatus, tvProductName, tvBuyerName, tvQuantity, tvTotalPrice, tvOrderDate;
         Button btnAccept, btnReject;
         LinearLayout llActions;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
             tvOrderId = itemView.findViewById(R.id.tvOrderId);
+            tvStatus = itemView.findViewById(R.id.tvStatus);
             tvProductName = itemView.findViewById(R.id.tvProductName);
             tvBuyerName = itemView.findViewById(R.id.tvBuyerName);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvTotalPrice = itemView.findViewById(R.id.tvTotalPrice);
             tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
-            tvStatus = itemView.findViewById(R.id.tvStatus);
             btnAccept = itemView.findViewById(R.id.btnAccept);
             btnReject = itemView.findViewById(R.id.btnReject);
             llActions = itemView.findViewById(R.id.llActions);

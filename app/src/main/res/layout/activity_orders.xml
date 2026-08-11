@@ -21,6 +21,13 @@
         android:layout_height="match_parent">
 
         <!-- Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary_green"
+            android:visibility="gone" />
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -63,13 +70,6 @@
                 android:textSize="14sp"
                 android:textColor="@color/secondary_text"
                 android:layout_marginTop="8dp" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/primary_green" />
 
         </LinearLayout>
 

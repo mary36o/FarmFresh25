@@ -74,13 +74,13 @@ public class SellerDashboardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Orders - Goes to OrdersActivity
+        // Orders - Goes to Order2Activity
         cardOrders.setOnClickListener(v -> {
             Intent intent = new Intent(SellerDashboardActivity.this, Order2Activity.class);
             startActivity(intent);
         });
 
-        // In SellerDashboardActivity.java - Update the profile click listener
+        // Profile
         cardProfile.setOnClickListener(v -> {
             Intent intent = new Intent(SellerDashboardActivity.this, SellerProfileActivity.class);
             startActivity(intent);
@@ -90,6 +90,9 @@ public class SellerDashboardActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(v -> {
             auth.signOut();
             Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SellerDashboardActivity.this, LoginActivity4.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
         });
     }
@@ -130,7 +133,6 @@ public class SellerDashboardActivity extends AppCompatActivity {
 
         // Load total orders and pending orders
         db.collection("orders")
-                .whereEqualTo("sellerId", sellerId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     int total = queryDocumentSnapshots.size();

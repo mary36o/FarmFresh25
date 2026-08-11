@@ -58,7 +58,7 @@ public class SellerListActivity extends AppCompatActivity {
                         Seller seller = doc.toObject(Seller.class);
                         sellerList.add(seller);
                     }
-                    adapter.notifyDataSetChanged();
+                    adapter.updateList(sellerList);
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Failed to load sellers: " + e.getMessage(),
@@ -88,20 +88,18 @@ public class SellerListActivity extends AppCompatActivity {
             return;
         }
 
-        db.collection("sellers")
-                .whereEqualTo("name", query)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    sellerList.clear();
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Seller seller = doc.toObject(Seller.class);
-                        sellerList.add(seller);
-                    }
-                    adapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Search failed: " + e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                });
+        String lowerQuery = query.toLowerCase();
+        List<Seller> filtered = new ArrayList<>();
+        for (Seller seller : sellerList) {
+            String name = seller.getName();
+            String storeName = seller.getStoreName();
+            if ((name != null && name.toLowerCase().contains(lowerQuery))
+                    || (storeName != null && storeName.toLowerCase().contains(lowerQuery))) {
+                filtered.add(seller);
+            }
+        }
+
+        adapter.updateList(filtered);
+        adapter.notifyDataSetChanged();
     }
 }

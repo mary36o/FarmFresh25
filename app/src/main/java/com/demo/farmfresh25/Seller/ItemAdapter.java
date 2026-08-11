@@ -103,8 +103,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 .document(item.getId())
                 .delete()
                 .addOnSuccessListener(aVoid -> {
-                    itemList.remove(position);
-                    notifyItemRemoved(position);
+                    if (position >= 0 && position < itemList.size()) {
+                        itemList.remove(position);
+                        notifyItemRemoved(position);
+                    }
                     Toast.makeText(context, "Item deleted", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {

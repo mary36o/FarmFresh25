@@ -1,9 +1,5 @@
 package com.demo.farmfresh25.Seller;
 
-import static com.demo.farmfresh25.R.*;
-
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
 import com.demo.farmfresh25.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -57,8 +51,11 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.SellerView
         if (seller.getImageUrl() != null && !seller.getImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(seller.getImageUrl())
-                    .placeholder(R.drawable.ic_profile)
+                    .placeholder(R.drawable.profile_placeholder)
+                    .error(R.drawable.profile_placeholder)
                     .into(holder.ivProfile);
+        } else {
+            holder.ivProfile.setImageResource(R.drawable.profile_placeholder);
         }
 
         // Update button
@@ -68,14 +65,13 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.SellerView
         holder.btnDelete.setOnClickListener(v -> showDeleteConfirmation(seller, position));
     }
 
-    @SuppressLint("MissingInflatedId")
     private void showUpdateDialog(Seller seller, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_seller_update, null);
 
         EditText etName = view.findViewById(R.id.etName);
         EditText etStoreName = view.findViewById(R.id.etStoreName);
-         EditText etEmail = view.findViewById(R.id.etEmail);
+        EditText etEmail = view.findViewById(R.id.etEmail);
         EditText etPhone = view.findViewById(R.id.etPhone);
         EditText etAddress = view.findViewById(R.id.etAddress);
 
@@ -132,8 +128,10 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.SellerView
                     db.collection("sellers").document(seller.getId())
                             .delete()
                             .addOnSuccessListener(aVoid -> {
-                                sellerList.remove(position);
-                                notifyItemRemoved(position);
+                                if (position >= 0 && position < sellerList.size()) {
+                                    sellerList.remove(position);
+                                    notifyItemRemoved(position);
+                                }
                                 Toast.makeText(context, "Seller deleted", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
@@ -146,10 +144,12 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.SellerView
 
     @Override
     public int getItemCount() {
-        return sellerList.size();
+        return sellerList != null ? sellerList.size() : 0;
     }
 
-    public void updateList(List<Seller> sellerList) {
+    public void updateList(List<Seller> newList) {
+        this.sellerList = newList;
+        notifyDataSetChanged();
     }
 
     static class SellerViewHolder extends RecyclerView.ViewHolder {
@@ -159,15 +159,14 @@ public class SellerAdapter extends RecyclerView.Adapter<SellerAdapter.SellerView
 
         SellerViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivProfile = itemView.findViewById(R.id.ivProfile);
-            tvName = itemView.findViewById(R.id.etName);
-            tvStoreName = itemView.findViewById(R.id.etStoreName);
+            ivProfile = itemView.findViewById(R.id.ivSellerImage);
+            tvName = itemView.findViewById(R.id.tvSellerName);
+            tvStoreName = itemView.findViewById(R.id.tvShopName);
             tvEmail = itemView.findViewById(R.id.tvEmail);
             tvPhone = itemView.findViewById(R.id.tvPhone);
-            tvAddress = itemView.findViewById(R.id.etAddress);
+            tvAddress = itemView.findViewById(R.id.tvAddress);
             btnUpdate = itemView.findViewById(R.id.btnUpdate);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
-
