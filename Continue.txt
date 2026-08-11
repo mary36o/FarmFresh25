@@ -8,7 +8,13 @@ Fix build error: `cannot find symbol: class EditProductActivity`
 - Error line (actual code is line 85):
   `Intent intent = new Intent(context, com.demo.farmfresh25.Seller.EditProductActivity.class);`
 
-## Status: SOLVED (2026-08-11)
+## Status: SOLVED + VERIFIED (2026-08-11)
+
+## Session 2 follow-up (2026-08-11)
+- Re-ran `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew assembleDebug`
+  after resume from a new chat -> BUILD SUCCESSFUL in 1m 13s.
+  No stale state this time; compileDebugJavaWithJavac was UP-TO-DATE,
+  meaning the class compiled cleanly and is cached. Nothing outstanding.
 
 ## RESOLUTION
 The error was caused by STALE INCREMENTAL COMPILE STATE in AGP. A previous build

@@ -22,6 +22,10 @@
             android:name=".Settings.SettingsActivity"
             android:exported="false" />
         <activity
+            android:name=".EditProfile.EditProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".Wishlist.WishlistActivity"
             android:exported="false" />
         <activity

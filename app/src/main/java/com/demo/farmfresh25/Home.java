@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,6 +23,7 @@ import com.demo.farmfresh25.Authentification.Login;
 import com.demo.farmfresh25.Profile.ProfileFragment;
 //import com.demo.farmfresh25.ShoppingCart.ShoppingCart;
 import com.demo.farmfresh25.Seller.LoginActivity4;
+import com.demo.farmfresh25.Settings.SettingsActivity;
 import com.demo.farmfresh25.databinding.ActivityHomeBinding;
 
 import com.demo.farmfresh25.ui.checkout.CheckoutFragment ;
@@ -78,6 +81,19 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+
+        MenuItem switchItem = menu.findItem(R.id.app_bar_switch);
+        if (switchItem != null) {
+            Switch darkModeSwitch = switchItem.getActionView().findViewById(R.id.switchDarkMode);
+            if (darkModeSwitch != null) {
+                darkModeSwitch.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+                darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    AppCompatDelegate.setDefaultNightMode(isChecked
+                            ? AppCompatDelegate.MODE_NIGHT_YES
+                            : AppCompatDelegate.MODE_NIGHT_NO);
+                });
+            }
+        }
         return true;
     }
 
@@ -91,9 +107,9 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
             startActivity(intent);
             finish();
 
-        } else if (R.id.app_bar_switch== item.getItemId()) {
+        } else if (R.id.action_settings == item.getItemId()) {
 
-            Toast.makeText(this, "Light", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
 
