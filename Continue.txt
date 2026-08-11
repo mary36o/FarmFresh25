@@ -1,0 +1,69 @@
+# FarmFresh25 - Session Continue File
+Created: 2026-08-11
+Use this file to resume work from a different chat.
+
+## Current Task
+Fix build error: `cannot find symbol: class EditProductActivity`
+- File: `app/src/main/java/com/demo/farmfresh25/Seller/ItemAdapter.java:84`
+- Error line (actual code is line 85):
+  `Intent intent = new Intent(context, com.demo.farmfresh25.Seller.EditProductActivity.class);`
+
+## Status: SOLVED (2026-08-11)
+
+## RESOLUTION
+The error was caused by STALE INCREMENTAL COMPILE STATE in AGP. A previous build
+(when the default/broken JDK setup was in use) left Gradle believing
+EditProductActivity was already compiled, but its .class file was missing. javac
+then silently skipped the source file, so `cannot find symbol` appeared in
+ItemAdapter.java.
+
+Fix that worked:
+  JAVA_HOME=/snap/android-studio/235/jbr ./gradlew clean compileDebugJavaWithJavac
+  JAVA_HOME=/snap/android-studio/235/jbr ./gradlew assembleDebug
+BUILD SUCCESSFUL. EditProductActivity.class now generated.
+
+## Findings (for reference)
+
+### 1. The target class DOES exist and looks correct
+- File: `app/src/main/java/com/demo/farmfresh25/Seller/EditProductActivity.java` (277 lines)
+- Declared package: `package com.demo.farmfresh25.Seller;` (matches expected)
+- `public class EditProductActivity extends AppCompatActivity`
+- No obvious syntax errors on manual read.
+- ItemAdapter already imports it: `import com.demo.farmfresh25.Seller.EditProductActivity;` (line 19)
+
+### 2. Build environment problems (BIGGEST ISSUE - build can't run yet)
+- Default system JDK is **OpenJDK 25.0.2** -> Gradle 8.13 + Kotlin fails with
+  `java.lang.IllegalArgumentException: 25.0.2` (Kotlin's JavaVersion parser can't parse "25.0.2").
+- JDK 11 (`/usr/lib/jvm/java-11-openjdk-amd64`) -> AGP 8.13.2 rejects: "Android Gradle plugin requires Java 17".
+- **Working JDK 21 found**: `/snap/android-studio/235/jbr` and `/snap/android-studio/236/jbr` (OpenJDK 21.0.10)
+- Build command that works for this project:
+  `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew compileDebugJavaWithJavac`
+- NOTE: Last build attempt hit a stale Gradle cache lock
+  (`/home/the-brain/.gradle/caches/8.13/generated-gradle-jars` in use by another instance).
+  Fixed by running `./gradlew --stop` (stopped 3 daemons) + `pkill -f gradle`.
+  Build was about to be re-run when user aborted. Need to re-run now.
+
+## Hypothesis (most likely)
+"cannot find symbol: class EditProductActivity" is a KNOCK-ON error. javac emits it when the
+EditProductActivity class file failed to be generated in the same compile run. Likely real errors are
+inside EditProductActivity.java or its resources (layout `activity_edit_product`, ids etName/etPrice/
+etQuantity/etCategory/etDescription/ivImage/btnSelectImage/btnUpdateItem/btnDeleteItem/progressBar,
+drawables ic_placeholder/ic_error). Once the real build runs, the true errors will surface.
+
+## Next steps
+- DONE: `clean` fixed stale incremental state; `assembleDebug` passes.
+- If `cannot find symbol` reappears for an EXISTING class after editing: run
+  `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew clean` before diagnosing further.
+- Verify on-device: launch ItemListActivity -> Edit button should open EditProductActivity.
+
+## Relevant files
+- `app/src/main/java/com/demo/farmfresh25/Seller/ItemAdapter.java` (error reported here, line 85)
+- `app/src/main/java/com/demo/farmfresh25/Seller/EditProductActivity.java` (target class)
+- `app/src/main/java/com/demo/farmfresh25/Seller/ItemListActivity.java` (launches edit from list)
+- `app/src/main/java/com/demo/farmfresh25/Seller/Item.java` (data model used by both)
+- `app/src/main/java/com/demo/farmfresh25/Seller/OrderAdapter.java` (sibling adapter, same package)
+
+## Commands cheat-sheet
+- Compile Java only: `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew compileDebugJavaWithJavac`
+- Full build: `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew assembleDebug`
+- Stop daemons if lock errors: `./gradlew --stop && pkill -f gradle`
