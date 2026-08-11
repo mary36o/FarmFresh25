@@ -1,4 +1,4 @@
-package com.demo.farmfresh25;
+package com.demo.farmfresh25.Seller;
 
 // models/User.java
 public class User {

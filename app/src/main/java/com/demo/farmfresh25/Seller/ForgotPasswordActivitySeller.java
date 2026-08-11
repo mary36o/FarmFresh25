@@ -1,4 +1,4 @@
-package com.demo.farmfresh25;
+package com.demo.farmfresh25.Seller;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.demo.farmfresh25.Seller.LoginActivity4;
+import com.demo.farmfresh25.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -59,6 +59,7 @@ public class ForgotPasswordActivitySeller extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ForgotPasswordActivitySeller.this, LoginActivity4.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 }

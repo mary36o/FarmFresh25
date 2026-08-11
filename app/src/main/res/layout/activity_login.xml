@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Top App Bar -->
-
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
@@ -17,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="Account Login"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +27,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="24dp">
 
@@ -67,7 +64,7 @@
                 android:layout_marginBottom="32dp"
                 android:text="Fresh from the farm to your table"
                 android:textColor="#76E476"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <!-- Email / Phone -->
             <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +117,7 @@
                 android:onClick="ForgotPass"
                 android:text="Forgot Password?"
                 android:textColor="#11D452"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <!-- Login Button -->
@@ -131,7 +128,8 @@
                 android:layout_marginTop="24dp"
                 android:text="Login"
                 android:textStyle="bold"
-                app:cornerRadius="16dp" />
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/primary_green" />
 
             <!-- Register -->
             <TextView
@@ -139,14 +137,88 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:text=" Don't have an a ? Create an Account"
+                android:layout_marginTop="16dp"
+                android:text="Don't have an account? Create an Account"
                 android:textColor="#11D452"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/divider_color" />
+
+            <!-- Seller Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are you a Seller?"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sell your products on FarmFresh25"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <!-- Seller Login Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSellerLogin"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="SELLER LOGIN"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/primary_green"
+                        android:stateListAnimator="@null" />
+
+                    <!-- Seller Register Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSellerRegister"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="SELLER REGISTER"
+                        android:textAllCaps="true"
+                        android:textSize="14sp"
+                        android:textColor="@color/primary_green"
+                        app:cornerRadius="12dp"
+                        app:strokeColor="@color/primary_green"
+                        app:strokeWidth="1dp"
+                        app:backgroundTint="@color/white"
+                        android:stateListAnimator="@null" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

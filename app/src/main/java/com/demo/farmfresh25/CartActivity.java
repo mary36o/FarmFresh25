@@ -43,6 +43,6 @@ public class CartActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerCart);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new CartAdapter(CartManager.cartList));
+        recyclerView.setAdapter(new CartAdapter(CartManager.cartList,this));
     }
 }

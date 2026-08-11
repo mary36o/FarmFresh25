@@ -24,10 +24,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:animateLayoutChanges="true"
-            android:background="?colorPrimary"
+            android:background="@color/card_background"
+            app:itemTextColor="@color/black"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_home"
-            app:itemBackground="@drawable/menu_item_background"
             app:menu="@menu/activity_main_drawer" />
     </androidx.drawerlayout.widget.DrawerLayout>
 

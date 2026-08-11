@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.demo.farmfresh25.Authentification.Login;
 import com.demo.farmfresh25.EditProfile.EditProfileActivity;
-import com.demo.farmfresh25.OrderHistory.OrderHistoryActivity;
+//import com.demo.farmfresh25.OrderHistory.OrderHistoryActivity;
 import com.demo.farmfresh25.R;
 import com.demo.farmfresh25.Settings.SettingsActivity;
 import com.demo.farmfresh25.ShoppingCart.ShoppingCartActivity;
@@ -105,7 +105,7 @@ public class ProfileFragment extends Fragment {
         if (ordersCard != null) {
             ordersCard.setOnClickListener(v -> {
                 if (currentUser != null) {
-                    Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
+                    Intent intent = new Intent(getActivity(), WishlistActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getContext(), "Please login to view orders", Toast.LENGTH_SHORT).show();
@@ -170,7 +170,7 @@ public class ProfileFragment extends Fragment {
         View orderStatsCard = view.findViewById(R.id.orderStatsCard);
         if (orderStatsCard != null) {
             orderStatsCard.setOnClickListener(v -> {
-                Intent intent = new Intent(getActivity(), OrderHistoryActivity.class);
+                Intent intent = new Intent(getActivity(), WishlistActivity.class);
                 startActivity(intent);
             });
         }

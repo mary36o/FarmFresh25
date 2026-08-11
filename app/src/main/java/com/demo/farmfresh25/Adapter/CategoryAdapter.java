@@ -65,7 +65,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .into(holder.image);
         holder.name.setText(productModel.getName());
 //        holder.price.setText(productModel.getPrice());
-//        holder.description.setText(productModel.getDescription());
+        holder.description.setText(productModel.getDescription());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +98,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             cardView = itemView.findViewById(R.id.CutomCardView);
             image = itemView.findViewById(R.id.itemImage);
             name = itemView.findViewById(R.id.itemName);
+            description = itemView.findViewById(R.id.itemDescription);
+
+
+
 
         }
     }

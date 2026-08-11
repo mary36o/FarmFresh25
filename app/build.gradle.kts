@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.implementation
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
@@ -35,19 +33,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
-
-//    buildscript {
-//        repositories {
-//            google()
-//            mavenCentral()
-//        }
-//
-//    }
-
-
 }
+
 dependencies {
+    implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -67,19 +56,17 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    // Firebase BOM - Keep this as is
+    // Firebase BOM
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
 
-    // Firebase dependencies - Add these explicitly
+    // Firebase dependencies
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage")  // ADD THIS LINE
 
     // Other dependencies
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.google.android.material:material:1.11.0")
-
-    // Add this - Google Play Services base
     implementation("com.google.android.gms:play-services-base:18.3.0")
 }
-

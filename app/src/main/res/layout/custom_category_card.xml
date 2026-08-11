@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:visibility="visible">
+    android:layout_marginBottom="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/CutomCardView"
@@ -19,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <!-- Product Image -->
             <ImageView
@@ -48,25 +48,12 @@
                 app:layout_constraintTop_toBottomOf="@id/itemImage" />
 
             <!-- Price -->
-            <TextView
-                android:id="@+id/itemPrice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="GHS 25"
-                android:textColor="#2E7D32"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemName" />
 
             <!-- Description -->
             <TextView
                 android:id="@+id/itemDescription"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="Fresh organic cassava directly from farm"
@@ -74,7 +61,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/itemPrice" />
+                tools:layout_editor_absoluteY="232dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

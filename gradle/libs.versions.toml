@@ -24,6 +24,7 @@ remoteCreationCore = "1.0.0-alpha07"
 litertSupportApi = "1.4.2"
 gamesActivity = "4.4.2"
 engageCore = "1.6.0"
+activityKtx = "1.8.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -48,6 +49,7 @@ remote-creation-core = { group = "androidx.compose.remote", name = "remote-creat
 litert-support-api = { group = "com.google.ai.edge.litert", name = "litert-support-api", version.ref = "litertSupportApi" }
 games-activity = { group = "androidx.games", name = "games-activity", version.ref = "gamesActivity" }
 engage-core = { group = "com.google.android.engage", name = "engage-core", version.ref = "engageCore" }
+activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 
 
 [plugins]

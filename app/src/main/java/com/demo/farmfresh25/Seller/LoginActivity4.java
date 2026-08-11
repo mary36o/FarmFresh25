@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.demo.farmfresh25.Home;
 import com.demo.farmfresh25.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity4 extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private MaterialButton loginButton, registerButton;
     private ProgressBar progressBar;
@@ -35,9 +34,9 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
 
-        // Check if user is already signed in - if yes, go to Home
+        // Check if user is already signed in
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity4.this, SellerDashboardActivity.class));
             finish();
             return;
         }
@@ -71,34 +70,36 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Authenticate user
                 auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity4.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 loginButton.setEnabled(true);
 
                                 if (task.isSuccessful()) {
-                                    // Sign in success - go to Home
                                     FirebaseUser user = auth.getCurrentUser();
-                                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, Home.class));
+                                    Toast.makeText(LoginActivity4.this, "Login successful!", Toast.LENGTH_SHORT).show();
+
+                                    Intent intent = new Intent(LoginActivity4.this, SellerDashboardActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
                                     finish();
                                 } else {
-                                    // Sign in fails
                                     String errorMessage = task.getException() != null ?
                                             task.getException().getMessage() : "Authentication failed.";
-                                    Toast.makeText(LoginActivity.this, "Login failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity4.this, "Login failed: " + errorMessage, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
             }
         });
 
-        // Register button click - Navigate to Register
+        // Register button click
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                Intent intent = new Intent(LoginActivity4.this, SellerDashboardActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -108,9 +109,16 @@ public class LoginActivity extends AppCompatActivity {
             forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(LoginActivity.this, "Forgot Password - Coming soon!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity4.this, ForgotPasswordActivitySeller.class);
+                    startActivity(intent);
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Prevent going back to previous activities
+        moveTaskToBack(true);
     }
 }

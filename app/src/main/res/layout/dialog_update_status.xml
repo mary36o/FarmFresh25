@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Update Order Status"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvCurrentStatus"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Current: Pending"-->
+<!--        android:textSize="14sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnPending"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Pending"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnProcessing"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Processing"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnShipped"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Shipped"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnDelivered"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Delivered"-->
+<!--        android:layout_marginBottom="8dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnCancel"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Cancel"-->
+<!--        android:backgroundTint="#F44336"/>-->
+
+</LinearLayout>

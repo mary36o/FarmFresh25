@@ -124,17 +124,14 @@ public class EditProductActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         currentItem = documentSnapshot.toObject(Item.class);
                         if (currentItem != null) {
-                            // Set the ID
                             currentItem.setId(productId);
 
-                            // Populate fields
                             etName.setText(currentItem.getName());
                             etDescription.setText(currentItem.getDescription());
                             etPrice.setText(String.valueOf(currentItem.getPrice()));
                             etCategory.setText(currentItem.getCategory());
                             etQuantity.setText(String.valueOf(currentItem.getQuantity()));
 
-                            // Load image
                             currentImageUrl = currentItem.getImageUrl();
                             if (currentImageUrl != null && !currentImageUrl.isEmpty()) {
                                 Glide.with(this)
@@ -179,7 +176,6 @@ public class EditProductActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             btnUpdateItem.setEnabled(false);
 
-            // If there's a new image, upload it first
             if (imageUri != null) {
                 uploadImageAndUpdateItem(name, description, price, category, quantity);
             } else {
@@ -233,7 +229,6 @@ public class EditProductActivity extends AppCompatActivity {
                     btnUpdateItem.setEnabled(true);
                     Toast.makeText(this, "Product updated successfully!", Toast.LENGTH_SHORT).show();
 
-                    // Go back to item list
                     Intent intent = new Intent(EditProductActivity.this, ItemListActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

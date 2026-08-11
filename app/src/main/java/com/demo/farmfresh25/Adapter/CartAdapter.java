@@ -25,20 +25,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     private FirebaseFirestore db;
     private OnCartItemChangedListener listener;
 
+    Context context;
+
     // Interface for cart item changes
     public interface OnCartItemChangedListener {
         void onCartItemChanged();
     }
 
-    public CartAdapter(List<CartModel> cartList) {
+    public CartAdapter(List<CartModel> cartList,Context context) {
         this.cartList = cartList;
         this.db = FirebaseFirestore.getInstance();
+        this.context = context;
     }
 
-    public CartAdapter(List<CartModel> cartList, OnCartItemChangedListener listener) {
+    public CartAdapter(List<CartModel> cartList, OnCartItemChangedListener listener,Context context) {
         this.cartList = cartList;
         this.listener = listener;
         this.db = FirebaseFirestore.getInstance();
+        this.context = context;
     }
 
     @NonNull
@@ -112,17 +116,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 if (item.getQuantity() > 1) {
                     int newQuantity = item.getQuantity() - 1;
                     updateQuantity(item.getId(), newQuantity, position, holder.itemView.getContext());
-                } else {
-                    deleteItem(item.getId(), position, holder.itemView.getContext());
                 }
             });
         }
 
         // Delete button - Check if not null first
         if (holder.btnDelete != null) {
-            holder.btnDelete.setOnClickListener(v -> {
+
+                        holder.btnDelete.setOnClickListener(v -> {
                 deleteItem(item.getId(), position, holder.itemView.getContext());
             });
+            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -184,9 +189,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView productImage;
+        ImageView productImage,btnDelete;
         TextView productName, productPrice, productQuantity, itemTotal;
-        Button btnPlus, btnMinus, btnDelete;
+        Button btnPlus, btnMinus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -80,9 +80,10 @@ public class SellerDashboardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Profile
+        // In SellerDashboardActivity.java - Update the profile click listener
         cardProfile.setOnClickListener(v -> {
-            Toast.makeText(this, "Profile coming soon", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SellerDashboardActivity.this, SellerProfileActivity.class);
+            startActivity(intent);
         });
 
         // Logout

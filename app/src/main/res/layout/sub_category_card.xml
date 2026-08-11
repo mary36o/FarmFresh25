@@ -19,7 +19,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp">
 
             <!-- Product Image -->
             <ImageView
@@ -68,6 +69,7 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:singleLine="true"
                 android:text="Fresh organic cassava directly from farm"
                 android:textColor="#4CAF50"
                 android:textSize="14sp"

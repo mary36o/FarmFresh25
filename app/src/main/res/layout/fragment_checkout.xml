@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="360dp"
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:fillViewport="true">
@@ -16,37 +16,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Checkout"
-                android:textColor="@color/primary_text"
+                android:textColor="@color/text_primary"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="50dp"
                 android:layout_height="3dp"
                 android:background="@color/primary_green"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginTop="8dp" />
 
             <TextView
+                android:id="@+id/txtOrderId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Please fill in your details to complete the order"
                 android:textColor="@color/secondary_text"
-                android:textSize="14sp" />
+                android:textSize="12sp"
+                android:layout_marginTop="8dp" />
+
         </LinearLayout>
 
         <!-- Order Summary Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="@color/card_background">
@@ -61,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Order Summary"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
@@ -76,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                   >
+                    android:layout_marginBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -87,20 +89,20 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtSubtotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtSubtotal"
                         android:text="GHS 0.00"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal"
-                   >
+                    android:layout_marginBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -111,43 +113,44 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/txtDeliveryFee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="GHS 10.00"
                         android:textColor="@color/secondary_text"
                         android:textSize="14sp" />
+
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/divider_color"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginVertical="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                   >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Total Amount"
-                        android:textColor="@color/primary_text"
-                        android:textSize="18sp"
+                        android:text="Total"
+                        android:textColor="@color/text_primary"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txtTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtTotal"
                         android:text="GHS 0.00"
                         android:textColor="@color/green_price"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -158,7 +161,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="@color/card_background">
@@ -173,71 +176,74 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Delivery Information"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Name Field -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/ic_menu_camera"
-                    app:startIconTint="@color/primary_green"
-                    app:hintTextColor="@color/primary_green"
-                    app:boxStrokeColor="@color/primary_green">
+                    app:startIconDrawable="@drawable/profile_placeholder"
+                    app:startIconTint="@color/primary_green">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Full Name"
-                        android:textColor="@color/primary_text"
-                        android:inputType="textPersonName"
-                        android:maxLines="1" />
+                        android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Phone Field -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/ic_menu_camera"
-                    app:startIconTint="@color/primary_green"
-                    app:hintTextColor="@color/primary_green"
-                    app:boxStrokeColor="@color/primary_green">
+                    app:startIconDrawable="@android:drawable/stat_sys_phone_call"
+                    app:startIconTint="@color/primary_green">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone Number"
-                        android:textColor="@color/primary_text"
-                        android:inputType="phone"
-                        android:maxLines="1" />
+                        android:inputType="phone" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Address Field -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:startIconDrawable="@android:drawable/ic_dialog_email"
+                    app:startIconTint="@color/primary_green">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email Address"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/ic_menu_camera"
-                    app:startIconTint="@color/primary_green"
-                    app:hintTextColor="@color/primary_green"
-                    app:boxStrokeColor="@color/primary_green">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:startIconDrawable="@android:drawable/ic_menu_mylocation"
+                    app:startIconTint="@color/primary_green">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Delivery Address"
-                        android:textColor="@color/primary_text"
                         android:inputType="textPostalAddress"
                         android:maxLines="3" />
 
@@ -251,7 +257,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="@color/card_background">
@@ -266,10 +272,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Payment Method"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp" />
+                    android:layout_marginBottom="16dp" />
 
                 <RadioGroup
                     android:id="@+id/radioGroupPayment"
@@ -282,8 +288,8 @@
                         android:layout_height="wrap_content"
                         android:text="Cash on Delivery"
                         android:checked="true"
-                        android:padding="8dp"
-                        android:textColor="@color/primary_text"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary"
                         android:buttonTint="@color/primary_green" />
 
                     <RadioButton
@@ -291,15 +297,87 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Mobile Money"
-                        android:padding="8dp"
-                        android:textColor="@color/primary_text"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary"
                         android:buttonTint="@color/primary_green" />
 
                 </RadioGroup>
 
+                <!-- Mobile Money Details -->
+                <LinearLayout
+                    android:id="@+id/mobileMoneyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="12dp">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_color"
+                        android:layout_marginBottom="12dp" />
+
+                    <ImageView
+                        android:id="@+id/momoLogo"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/payments_24dp_75fb4c_fill0_wght400_grad0_opsz24" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:startIconDrawable="@android:drawable/stat_sys_phone_call"
+                        app:startIconTint="@color/primary_green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtMomoNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Mobile Money Number (e.g. 024XXXXXXX)"
+                            android:inputType="phone" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:startIconDrawable="@drawable/ic_person_white"
+                        app:startIconTint="@color/primary_green">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtMomoProvider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Provider (MTN, Vodafone, AirtelTigo)"
+                            android:inputType="text" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <!-- Pay with Mobile Money Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPayWithMom"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="8dp"
+            android:text="PAY WITH MOBILE MONEY"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:backgroundTint="@color/black"
+
+            app:cornerRadius="12dp" />
 
         <!-- Place Order Button -->
         <com.google.android.material.button.MaterialButton
@@ -309,32 +387,29 @@
             android:text="PLACE ORDER"
             android:textAllCaps="true"
             android:textSize="16sp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             app:cornerRadius="12dp"
             app:backgroundTint="@color/primary_green"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:stateListAnimator="@null" />
+            android:layout_marginBottom="16dp" />
 
         <!-- Secure Note -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_menu_camera"
-                android:tint="@color/primary_green" />
+                android:src="@android:drawable/ic_lock_idle_lock"
+                app:tint="@color/secondary_text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Secure payment"
-                android:textColor="@color/primary_green"
+                android:textColor="@color/secondary_text"
                 android:textSize="12sp"
                 android:layout_marginStart="4dp" />
 
@@ -343,3 +418,357 @@
     </LinearLayout>
 
 </ScrollView>
+
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/background_color"-->
+<!--    android:fillViewport="true">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:padding="16dp">-->
+
+<!--        &lt;!&ndash; Header Section &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Checkout"-->
+<!--                android:textColor="@color/primary_text"-->
+<!--                android:textSize="28sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginBottom="8dp" />-->
+
+<!--            <View-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="3dp"-->
+<!--                android:background="@color/primary_green"-->
+<!--                android:layout_marginBottom="16dp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Please fill in your details to complete the order"-->
+<!--                android:textColor="@color/secondary_text"-->
+<!--                android:textSize="14sp" />-->
+<!--        </LinearLayout>-->
+
+<!--        &lt;!&ndash; Order Summary Card &ndash;&gt;-->
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardElevation="4dp"-->
+<!--            app:cardBackgroundColor="@color/card_background">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Order Summary"-->
+<!--                    android:textColor="@color/primary_text"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginBottom="12dp" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/divider_color"-->
+<!--                    android:layout_marginBottom="12dp" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                   >-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Subtotal"-->
+<!--                        android:textColor="@color/secondary_text"-->
+<!--                        android:textSize="14sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/txtSubtotal"-->
+<!--                        android:text="GHS 0.00"-->
+<!--                        android:textColor="@color/secondary_text"-->
+<!--                        android:textSize="14sp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:orientation="horizontal"-->
+<!--                   >-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Delivery Fee"-->
+<!--                        android:textColor="@color/secondary_text"-->
+<!--                        android:textSize="14sp" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="GHS 10.00"-->
+<!--                        android:textColor="@color/secondary_text"-->
+<!--                        android:textSize="14sp" />-->
+<!--                </LinearLayout>-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/divider_color"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:layout_marginBottom="12dp" />-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                   >-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Total Amount"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/txtTotal"-->
+<!--                        android:text="GHS 0.00"-->
+<!--                        android:textColor="@color/green_price"-->
+<!--                        android:textSize="20sp"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        &lt;!&ndash; Customer Details Card &ndash;&gt;-->
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardElevation="4dp"-->
+<!--            app:cardBackgroundColor="@color/card_background">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Delivery Information"-->
+<!--                    android:textColor="@color/primary_text"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginBottom="16dp" />-->
+
+<!--                &lt;!&ndash; Name Field &ndash;&gt;-->
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="12dp"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                    app:startIconDrawable="@drawable/ic_menu_camera"-->
+<!--                    app:startIconTint="@color/primary_green"-->
+<!--                    app:hintTextColor="@color/primary_green"-->
+<!--                    app:boxStrokeColor="@color/primary_green">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/edtName"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Full Name"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:inputType="textPersonName"-->
+<!--                        android:maxLines="1" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                &lt;!&ndash; Phone Field &ndash;&gt;-->
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="12dp"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                    app:startIconDrawable="@drawable/ic_menu_camera"-->
+<!--                    app:startIconTint="@color/primary_green"-->
+<!--                    app:hintTextColor="@color/primary_green"-->
+<!--                    app:boxStrokeColor="@color/primary_green">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/edtPhone"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Phone Number"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:inputType="phone"-->
+<!--                        android:maxLines="1" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                &lt;!&ndash; Address Field &ndash;&gt;-->
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                    app:startIconDrawable="@drawable/ic_menu_camera"-->
+<!--                    app:startIconTint="@color/primary_green"-->
+<!--                    app:hintTextColor="@color/primary_green"-->
+<!--                    app:boxStrokeColor="@color/primary_green">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/edtAddress"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Delivery Address"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:inputType="textPostalAddress"-->
+<!--                        android:maxLines="3" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        &lt;!&ndash; Payment Methods Card &ndash;&gt;-->
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="24dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardElevation="4dp"-->
+<!--            app:cardBackgroundColor="@color/card_background">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:padding="16dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Payment Method"-->
+<!--                    android:textColor="@color/primary_text"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginBottom="12dp" />-->
+
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/radioGroupPayment"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radioCashOnDelivery"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Cash on Delivery"-->
+<!--                        android:checked="true"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:buttonTint="@color/primary_green" />-->
+
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/radioMobileMoney"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Mobile Money"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:textColor="@color/primary_text"-->
+<!--                        android:buttonTint="@color/primary_green" />-->
+
+<!--                </RadioGroup>-->
+
+<!--            </LinearLayout>-->
+
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        &lt;!&ndash; Place Order Button &ndash;&gt;-->
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btnPlaceOrder"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="56dp"-->
+<!--            android:text="PLACE ORDER"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:textSize="16sp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            app:cornerRadius="12dp"-->
+<!--            app:backgroundTint="@color/primary_green"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:stateListAnimator="@null" />-->
+
+<!--        &lt;!&ndash; Secure Note &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginBottom="16dp">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="16dp"-->
+<!--                android:layout_height="16dp"-->
+<!--                android:src="@drawable/ic_menu_camera"-->
+<!--                android:tint="@color/primary_green" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" Secure payment"-->
+<!--                android:textColor="@color/primary_green"-->
+<!--                android:textSize="12sp"-->
+<!--                android:layout_marginStart="4dp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--</ScrollView>-->
+
+
+
+

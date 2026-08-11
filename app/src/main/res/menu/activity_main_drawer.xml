@@ -10,50 +10,25 @@
             android:title="@string/menu_home" />
     </group>
 
-    <group>
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_checkout"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/grocery_24dp_000000_fill0_wght400_grad0_opsz24"
             android:title="CheckOut" />
     </group>
 
-    <group>
-        <item
-            android:id="@+id/nav_productitem"
-            android:title="ProductItem" />
-    </group>
 
-<!--    <group android:checkableBehavior="single">-->
-<!--        <item-->
-<!--            android:id="@+id/nav_shoppingcart"-->
-
-<!--            android:icon="@drawable/outline_add_shopping_cart_24"-->
-<!--            android:title="ShoppingCart" />-->
-
-<!--    </group>-->
-
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="DashBoard" />
-    </group>
-
-    <group>
+    <group  android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
+            android:icon="@drawable/contacts_product_24dp_000000_fill0_wght400_grad0_opsz24"
             android:title="Profile" />
     </group>
 
-<!--    <group>-->
-<!--        <item-->
-<!--            android:id="@+id/nav_item"-->
-<!--            android:title="Item" />-->
-<!--    </group>-->
 
-    <group>
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_logout"
+            android:id="@+id/logout"
             android:icon="@drawable/ic_logout"
             android:title="Logout"
             android:iconTint="@color/error_color" />

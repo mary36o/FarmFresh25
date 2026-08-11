@@ -19,6 +19,7 @@ import com.demo.farmfresh25.Addproduct;
 import com.demo.farmfresh25.Category;
 import com.demo.farmfresh25.Interface.CategoryInterface;
 import com.demo.farmfresh25.Model.ProductModel;
+import com.demo.farmfresh25.Profile.ProfileFragment;
 import com.demo.farmfresh25.R;
 import com.demo.farmfresh25.Adapter.SliderAdapter;
 import com.demo.farmfresh25.crud.AddProductActivity;
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
     private FirebaseFirestore db;
 
     private FloatingActionButton fab;
+//    private FloatingActionButton Button2;
 
     int[] images = {
             R.drawable.image2,
@@ -82,6 +84,15 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
                 openAdmin();
             }
         });
+
+
+//        Button2 = binding.actionButton;
+//        Button2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new ProfileFragment();
+//            }
+//        });
 
 
         categoryRecyclerView  = binding.categoryRecyclerView;

@@ -50,7 +50,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
                 .into(holder.image);
 
         holder.name.setText(productModel.getName());
-        holder.price.setText(productModel.getPrice());
+        holder.price.setText("GHc " + productModel.getPrice());
         holder.description.setText(productModel.getDescription());
 
         holder.cardView.setOnClickListener(v -> {

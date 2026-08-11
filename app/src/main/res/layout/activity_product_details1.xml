@@ -32,7 +32,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/outline_arrow_back_24"
                 android:padding="8dp"
-                android:src="@drawable/outline_arrow_back_24"
+
                 app:tint="@color/white" />
 
             <!-- Favorite Button -->
@@ -204,12 +204,13 @@
 
                     <Button
                         android:id="@+id/btnMinus"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
                         android:background="@null"
+                        android:foregroundTint="@color/white"
                         android:stateListAnimator="@null"
                         android:text="-"
-                        android:textColor="@color/colorOnError"
+                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
                     <TextView
@@ -224,12 +225,13 @@
 
                     <Button
                         android:id="@+id/btnPlus"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
                         android:background="@null"
+                        android:foregroundTint="@color/white"
                         android:stateListAnimator="@null"
                         android:text="+"
-                        android:textColor="@color/colorOnError"
+                        android:textColor="@color/white"
                         android:textSize="20sp" />
 
                 </LinearLayout>
