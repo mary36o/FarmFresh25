@@ -79,12 +79,15 @@
 
                 <Button
                     android:id="@+id/btnMinus"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
+                    android:foregroundTint="@color/white"
+                    android:stateListAnimator="@null"
                     android:text="-"
-                    android:textColor="@color/primary_green"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
 
                 <TextView
                     android:id="@+id/cartQuantity"
@@ -97,12 +100,15 @@
 
                 <Button
                     android:id="@+id/btnPlus"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
                     android:background="@null"
+                    android:foregroundTint="@color/white"
+                    android:stateListAnimator="@null"
                     android:text="+"
-                    android:textColor="@color/primary_green"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
 
             </LinearLayout>
 

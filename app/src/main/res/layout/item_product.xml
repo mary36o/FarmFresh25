@@ -79,6 +79,8 @@
                 android:maxLines="2"
                 android:ellipsize="end" />
 
+            
+
             <TextView
                 android:id="@+id/tvItemStatus"
                 android:layout_width="wrap_content"

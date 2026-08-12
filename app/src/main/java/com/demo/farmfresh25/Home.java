@@ -24,6 +24,7 @@ import com.demo.farmfresh25.Profile.ProfileFragment;
 //import com.demo.farmfresh25.ShoppingCart.ShoppingCart;
 import com.demo.farmfresh25.Seller.LoginActivity4;
 import com.demo.farmfresh25.Settings.SettingsActivity;
+import com.demo.farmfresh25.ShoppingCart.ShoppingCartActivity;
 import com.demo.farmfresh25.databinding.ActivityHomeBinding;
 
 import com.demo.farmfresh25.ui.checkout.CheckoutFragment ;
@@ -71,7 +72,8 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
         binding.appBarHome.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Home.this, "Hi", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Home.this, ShoppingCartActivity.class);
+                startActivity(intent);
             }
         });
 
