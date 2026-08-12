@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/primary_green"
-        android:title="My Orders"
-        android:titleTextColor="@android:color/white" />
+        app:title="My Orders"
+        app:titleTextColor="@color/white" />
 
     <!-- Content Container -->
     <FrameLayout

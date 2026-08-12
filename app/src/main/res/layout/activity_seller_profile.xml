@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:title="My Profile"
-            android:titleTextColor="@android:color/white"
+            app:title="My Profile"
+            app:titleTextColor="@color/white"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <!-- Profile Header -->
