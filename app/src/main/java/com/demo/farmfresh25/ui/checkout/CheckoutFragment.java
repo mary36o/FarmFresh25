@@ -33,11 +33,11 @@ public class CheckoutFragment extends Fragment {
 
     // Views
     private EditText edtName, edtPhone, edtAddress, edtEmail;
-    private TextView txtSubtotal, txtDeliveryFee, txtTotal, txtOrderId;
+    private TextView txtSubtotal, txtDeliveryFee, txtTotal, txtOrderId, txtDiscount;
     private Button btnPlaceOrder, btnPayWithMom;
     private RadioGroup radioGroupPayment;
     private RadioButton radioCashOnDelivery, radioMobileMoney;
-    private LinearLayout mobileMoneyLayout;
+    private LinearLayout mobileMoneyLayout, discountLayout;
     private ImageView momoLogo;
 
     // Payment details
@@ -48,6 +48,7 @@ public class CheckoutFragment extends Fragment {
     private double totalAmount = 0;
     private double subtotal = 0;
     private double deliveryFee = 10.00;
+    private double discount = 0;
     private String selectedPaymentMethod = "Cash on Delivery";
     private String orderId;
 
@@ -64,8 +65,15 @@ public class CheckoutFragment extends Fragment {
 
         // Get total amount from arguments
         if (getArguments() != null) {
-            totalAmount = getArguments().getDouble("totalAmount", 0);
-            subtotal = totalAmount - deliveryFee;
+            if (getArguments().containsKey("subtotal")) {
+                subtotal = getArguments().getDouble("subtotal", 0);
+                deliveryFee = getArguments().getDouble("deliveryFee", 10.00);
+                discount = getArguments().getDouble("discount", 0);
+                totalAmount = subtotal + deliveryFee - discount;
+            } else {
+                totalAmount = getArguments().getDouble("totalAmount", 0);
+                subtotal = totalAmount - deliveryFee;
+            }
         }
 
         // Load cart total if no argument
@@ -80,6 +88,12 @@ public class CheckoutFragment extends Fragment {
 
         // Setup click listeners
         setupClickListeners();
+
+        // Initial payment state (Cash on Delivery is selected by default)
+        radioCashOnDelivery.setChecked(true);
+        mobileMoneyLayout.setVisibility(View.GONE);
+        btnPayWithMom.setVisibility(View.GONE);
+        btnPlaceOrder.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -104,6 +118,8 @@ public class CheckoutFragment extends Fragment {
 
         edtMomoNumber = view.findViewById(R.id.edtMomoNumber);
         edtMomoProvider = view.findViewById(R.id.edtMomoProvider);
+        txtDiscount = view.findViewById(R.id.txtDiscount);
+        discountLayout = view.findViewById(R.id.discountLayout);
     }
 
     private void setupClickListeners() {
@@ -344,6 +360,8 @@ public class CheckoutFragment extends Fragment {
         order.put("email", email);
         order.put("paymentMethod", paymentMethod);
         order.put("totalAmount", totalAmount);
+        order.put("subtotal", subtotal);
+        order.put("discount", discount);
         order.put("deliveryFee", deliveryFee);
         order.put("timestamp", System.currentTimeMillis());
         order.put("status", "Pending");
@@ -419,6 +437,12 @@ public class CheckoutFragment extends Fragment {
         txtDeliveryFee.setText(String.format("GHS %.2f", deliveryFee));
         txtTotal.setText(String.format("GHS %.2f", totalAmount));
         txtOrderId.setText("Order #" + orderId);
+        if (discount > 0 && discountLayout != null) {
+            discountLayout.setVisibility(View.VISIBLE);
+            txtDiscount.setText(String.format("- GHS %.2f", discount));
+        } else if (discountLayout != null) {
+            discountLayout.setVisibility(View.GONE);
+        }
     }
 
     private String generateOrderId() {

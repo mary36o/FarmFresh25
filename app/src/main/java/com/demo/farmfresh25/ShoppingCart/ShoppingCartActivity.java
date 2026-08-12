@@ -67,7 +67,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements CartAdapt
 
         // Initialize lists and adapter
         cartList = new ArrayList<>();
-        adapter = new CartAdapter(cartList, this);
+        adapter = new CartAdapter(cartList, this, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
@@ -181,8 +181,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements CartAdapt
         // Navigate to Checkout Fragment
         CheckoutFragment checkoutFragment = new CheckoutFragment();
 
-        // Pass total amount
+        // Pass total amount and breakdown
         Bundle bundle = new Bundle();
+        bundle.putDouble("subtotal", subtotal);
+        bundle.putDouble("discount", discount);
+        bundle.putDouble("deliveryFee", deliveryFeeAmount);
         bundle.putDouble("totalAmount", subtotal + deliveryFeeAmount - discount);
         checkoutFragment.setArguments(bundle);
 

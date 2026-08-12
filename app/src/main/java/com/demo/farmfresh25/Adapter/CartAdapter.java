@@ -122,12 +122,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         // Delete button - Check if not null first
         if (holder.btnDelete != null) {
-
-                        holder.btnDelete.setOnClickListener(v -> {
+            holder.btnDelete.setOnClickListener(v -> {
                 deleteItem(item.getId(), position, holder.itemView.getContext());
             });
-            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
-
         }
     }
 

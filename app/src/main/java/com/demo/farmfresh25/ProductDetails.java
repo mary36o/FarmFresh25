@@ -222,8 +222,12 @@ public class ProductDetails extends AppCompatActivity {
                     Toast.makeText(ProductDetails.this, "Proceeding to checkout", Toast.LENGTH_SHORT).show();
 
                     Bundle bundle = new Bundle();
-                    double total = Double.parseDouble(productPrice) * quantity;
-                    bundle.putDouble("totalAmount", total);
+                    double sub = Double.parseDouble(productPrice) * quantity;
+                    double delivery = 10.00;
+                    bundle.putDouble("subtotal", sub);
+                    bundle.putDouble("discount", 0);
+                    bundle.putDouble("deliveryFee", delivery);
+                    bundle.putDouble("totalAmount", sub + delivery);
 
                     CheckoutFragment checkoutFragment = new CheckoutFragment();
                     checkoutFragment.setArguments(bundle);
