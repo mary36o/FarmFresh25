@@ -69,4 +69,18 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("com.google.android.material:material:1.11.0")
     implementation("com.google.android.gms:play-services-base:18.3.0")
+
+    // ... existing dependencies ...
+// MPAndroidChart for charts
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+// For notifications
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
+// For date formatting
+    implementation("com.jakewharton.threetenabp:threetenabp:1.4.0")
+
+
+
+
+
+
 }
