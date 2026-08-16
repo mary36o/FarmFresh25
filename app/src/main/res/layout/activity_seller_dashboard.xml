@@ -365,7 +365,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_notifications"
+                        android:src="@drawable/notifications_24dp_000000_fill0_wght400_grad0_opsz24"
                         app:tint="#FF5722" />
 
                     <TextView
@@ -398,7 +398,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_analytics"
+                        android:src="@android:drawable/ic_menu_recent_history"
                         app:tint="#3F51B5" />
 
                     <TextView

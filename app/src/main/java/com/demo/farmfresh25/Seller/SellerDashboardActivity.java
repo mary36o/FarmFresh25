@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -407,8 +408,12 @@ public class SellerDashboardActivity extends AppCompatActivity {
         dataSet.setLineWidth(2f);
         dataSet.setCircleRadius(4f);
         dataSet.setValueTextSize(10f);
-        dataSet.setValueFormatter((value, entry, dataSetIndex, viewPortHandler) ->
-                "GH₵ " + String.format("%.0f", value));
+        dataSet.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return "GH₵ " + String.format("%.0f", value);
+            }
+        });
 
         LineData lineData = new LineData(dataSet);
         lineChartSales.setData(lineData);

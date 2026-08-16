@@ -1,7 +1,5 @@
 package com.demo.farmfresh25;
 
-import static android.os.Build.VERSION_CODES_FULL.R;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.farmfresh25.Seller.NotificationModel;
 import com.demo.farmfresh25.Seller.NotificationAdapter;
-import com.demo.farmfresh25.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -40,7 +37,7 @@ public class NotificationSeller extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R);
+        setContentView(R.layout.activity_notification_seller);
 
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
