@@ -45,6 +45,9 @@
             android:name=".Home"
             android:exported="false" />
         <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".Seller.SellerDashboardActivity"
             android:exported="false" />
         <activity

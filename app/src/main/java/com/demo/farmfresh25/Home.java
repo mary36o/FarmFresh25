@@ -19,7 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import com.demo.farmfresh25.Authentification.Login;
-//import com.demo.farmfresh25.DashBoard.DashboardFragment;
+import com.demo.farmfresh25.DashboardActivity;
 import com.demo.farmfresh25.Profile.ProfileFragment;
 //import com.demo.farmfresh25.ShoppingCart.ShoppingCart;
 import com.demo.farmfresh25.Seller.LoginActivity4;
@@ -127,6 +127,9 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
             navigationView.setCheckedItem(R.id.nav_home);
 //            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
 
+
+        } else if (R.id.nav_dashboard == item.getItemId()) {
+            startActivity(new Intent(Home.this, DashboardActivity.class));
 
         } else if (R.id.nav_checkout == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new CheckoutFragment()).commit();

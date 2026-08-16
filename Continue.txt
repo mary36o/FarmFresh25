@@ -73,3 +73,11 @@ drawables ic_placeholder/ic_error). Once the real build runs, the true errors wi
 - Compile Java only: `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew compileDebugJavaWithJavac`
 - Full build: `JAVA_HOME=/snap/android-studio/235/jbr ./gradlew assembleDebug`
 - Stop daemons if lock errors: `./gradlew --stop && pkill -f gradle`
+
+## Session 3 (2026-08-16)
+- Branch: master (1 commit ahead of origin/master)
+- Unstaged change: `app/build.gradle.kts` (1 line modified)
+- Total Java files: 76
+- Previous `cannot find symbol` issue was resolved in Session 2; no recurrence expected.
+- No new errors reported. Project appears stable.
+- TODO: commit/push the `app/build.gradle.kts` change when ready.
