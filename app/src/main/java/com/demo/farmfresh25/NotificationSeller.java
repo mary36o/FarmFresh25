@@ -1,6 +1,7 @@
 package com.demo.farmfresh25;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,10 +17,11 @@ import com.demo.farmfresh25.Seller.NotificationModel;
 import com.demo.farmfresh25.Seller.NotificationAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class NotificationSeller extends AppCompatActivity {
@@ -39,6 +42,13 @@ public class NotificationSeller extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_seller);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Notifications");
+        }
+
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
@@ -56,6 +66,15 @@ public class NotificationSeller extends AppCompatActivity {
         loadNotifications();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews() {
         rvNotifications = findViewById(R.id.rvNotifications);
         progressBar = findViewById(R.id.progressBar);
@@ -65,9 +84,7 @@ public class NotificationSeller extends AppCompatActivity {
 
     private void setupRecyclerView() {
         adapter = new NotificationAdapter(this, notificationList,
-                notification -> {
-                    markNotificationAsRead(notification);
-                });
+                notification -> markNotificationAsRead(notification));
         rvNotifications.setLayoutManager(new LinearLayoutManager(this));
         rvNotifications.setAdapter(adapter);
     }
@@ -79,26 +96,30 @@ public class NotificationSeller extends AppCompatActivity {
 
         db.collection("notifications")
                 .whereEqualTo("sellerId", sellerId)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .addSnapshotListener((value, error) -> {
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
                     progressBar.setVisibility(View.GONE);
-
-                    if (error != null) {
-                        Toast.makeText(this, "Error loading notifications: " + error.getMessage(),
-                                Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
                     notificationList.clear();
 
-                    if (value != null && !value.isEmpty()) {
-                        for (QueryDocumentSnapshot doc : value) {
+                    if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                        for (QueryDocumentSnapshot doc : querySnapshot) {
                             NotificationModel notification = doc.toObject(NotificationModel.class);
                             if (notification != null) {
                                 notification.setNotificationId(doc.getId());
                                 notificationList.add(notification);
                             }
                         }
+
+                        Collections.sort(notificationList, (a, b) -> {
+                            try {
+                                long timeA = Long.parseLong(a.getTimestamp());
+                                long timeB = Long.parseLong(b.getTimestamp());
+                                return Long.compare(timeB, timeA);
+                            } catch (NumberFormatException e) {
+                                return 0;
+                            }
+                        });
+
                         rvNotifications.setVisibility(View.VISIBLE);
                         llEmptyState.setVisibility(View.GONE);
                         adapter.notifyDataSetChanged();
@@ -107,6 +128,13 @@ public class NotificationSeller extends AppCompatActivity {
                         llEmptyState.setVisibility(View.VISIBLE);
                         tvEmptyText.setText("No notifications yet");
                     }
+                })
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    rvNotifications.setVisibility(View.GONE);
+                    llEmptyState.setVisibility(View.VISIBLE);
+                    tvEmptyText.setText("Failed to load notifications");
+                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -118,11 +146,5 @@ public class NotificationSeller extends AppCompatActivity {
                     notification.setRead(true);
                     adapter.notifyDataSetChanged();
                 });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadNotifications();
     }
 }

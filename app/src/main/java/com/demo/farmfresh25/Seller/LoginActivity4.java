@@ -19,12 +19,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity4 extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private MaterialButton loginButton, registerButton;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +36,11 @@ public class LoginActivity4 extends AppCompatActivity {
 
         // Initialize Firebase Auth
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Check if user is already signed in
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity4.this, SellerDashboardActivity.class));
-            finish();
+            checkSellerProfileAndRedirect();
             return;
         }
 
@@ -80,10 +83,7 @@ public class LoginActivity4 extends AppCompatActivity {
                                     FirebaseUser user = auth.getCurrentUser();
                                     Toast.makeText(LoginActivity4.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(LoginActivity4.this, SellerDashboardActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
+                                    checkSellerProfileAndRedirect();
                                 } else {
                                     String errorMessage = task.getException() != null ?
                                             task.getException().getMessage() : "Authentication failed.";
@@ -120,5 +120,47 @@ public class LoginActivity4 extends AppCompatActivity {
     public void onBackPressed() {
         // Prevent going back to previous activities
         moveTaskToBack(true);
+    }
+
+    private void checkSellerProfileAndRedirect() {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            return;
+        }
+
+        db.collection("sellers").document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    Intent intent;
+                    if (documentSnapshot.exists()) {
+                        String phone = documentSnapshot.getString("phone");
+                        String address = documentSnapshot.getString("address");
+                        String name = documentSnapshot.getString("name");
+                        String storeName = documentSnapshot.getString("storeName");
+
+                        boolean profileComplete = name != null && !name.isEmpty()
+                                && storeName != null && !storeName.isEmpty()
+                                && phone != null && !phone.isEmpty()
+                                && address != null && !address.isEmpty();
+
+                        if (profileComplete) {
+                            intent = new Intent(LoginActivity4.this, SellerDashboardActivity.class);
+                        } else {
+                            intent = new Intent(LoginActivity4.this, SellerSetupActivity.class);
+                        }
+                    } else {
+                        intent = new Intent(LoginActivity4.this, SellerSetupActivity.class);
+                    }
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Intent intent = new Intent(LoginActivity4.this, SellerSetupActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                });
     }
 }
