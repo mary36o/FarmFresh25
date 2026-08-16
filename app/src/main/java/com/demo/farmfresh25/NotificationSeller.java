@@ -81,7 +81,7 @@ public class NotificationSeller extends AppCompatActivity {
         llEmptyState = findViewById(R.id.llEmptyState);
         tvEmptyText = findViewById(R.id.tvEmptyText);
     }
-
+ 
     private void setupRecyclerView() {
         adapter = new NotificationAdapter(this, notificationList,
                 notification -> markNotificationAsRead(notification));
