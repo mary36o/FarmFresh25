@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import com.demo.farmfresh25.ui.checkout.CheckoutFragment ;
 import com.demo.farmfresh25.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Home extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
@@ -61,6 +63,16 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        // Set welcome message in nav header
+        View headerView = navigationView.getHeaderView(0);
+        TextView textWelcome = headerView.findViewById(R.id.textWelcome);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
+            textWelcome.setText("Welcome, " + user.getDisplayName() + "!");
+        } else {
+            textWelcome.setText("Welcome to FarmFresh");
+        }
 
         if (savedInstanceState == null) {
 

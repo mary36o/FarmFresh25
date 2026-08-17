@@ -77,13 +77,13 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        fab = binding.actionButton;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openAdmin();
-            }
-        });
+//        fab = binding.actionButton;
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openAdmin();
+//            }
+//        });
 
 
 //        Button2 = binding.actionButton;
