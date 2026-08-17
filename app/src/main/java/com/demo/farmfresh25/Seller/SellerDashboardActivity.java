@@ -262,7 +262,6 @@ public class SellerDashboardActivity extends AppCompatActivity {
 
         // Load orders with revenue and buyer count
         db.collection("orders")
-                .whereEqualTo("sellerId", sellerId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     int total = queryDocumentSnapshots.size();
@@ -272,25 +271,30 @@ public class SellerDashboardActivity extends AppCompatActivity {
 
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         String status = doc.getString("status");
-                        Double totalPrice = doc.getDouble("totalPrice");
+                        Double price = doc.getDouble("totalPrice");
+                        if (price == null) {
+                            price = doc.getDouble("totalAmount");
+                        }
                         String buyerId = doc.getString("buyerId");
+                        String userId = doc.getString("userId");
 
                         if (status != null && status.equals("Pending")) {
                             pending++;
                         }
 
-                        if (totalPrice != null && (status != null && status.equals("Delivered"))) {
-                            revenue += totalPrice;
+                        if (price != null) {
+                            revenue += price;
                         }
 
-                        if (buyerId != null && !buyerIds.contains(buyerId)) {
-                            buyerIds.add(buyerId);
+                        String buyerIdentifier = buyerId != null ? buyerId : userId;
+                        if (buyerIdentifier != null && !buyerIds.contains(buyerIdentifier)) {
+                            buyerIds.add(buyerIdentifier);
                         }
                     }
 
                     tvTotalOrders.setText(String.valueOf(total));
                     tvPendingOrders.setText(String.valueOf(pending));
-                    tvTotalRevenue.setText("GH₵ " + String.format("%.2f", revenue));
+                    tvTotalRevenue.setText("GH\u20B5 " + String.format("%.2f", revenue));
                     tvTotalBuyers.setText(String.valueOf(buyerIds.size()));
                 })
                 .addOnFailureListener(e -> {
@@ -364,12 +368,13 @@ public class SellerDashboardActivity extends AppCompatActivity {
         }
 
         db.collection("orders")
-                .whereEqualTo("sellerId", sellerId)
-                .whereEqualTo("status", "Delivered")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Double totalPrice = doc.getDouble("totalPrice");
+                        if (totalPrice == null) {
+                            totalPrice = doc.getDouble("totalAmount");
+                        }
                         Long timestamp = doc.getLong("timestamp");
 
                         if (totalPrice != null && timestamp != null) {
@@ -433,13 +438,15 @@ public class SellerDashboardActivity extends AppCompatActivity {
         }
 
         db.collection("orders")
-                .whereEqualTo("sellerId", sellerId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<String> processedBuyers = new ArrayList<>();
 
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         String buyerId = doc.getString("buyerId");
+                        if (buyerId == null) {
+                            buyerId = doc.getString("userId");
+                        }
                         Long timestamp = doc.getLong("timestamp");
 
                         if (buyerId != null && timestamp != null) {

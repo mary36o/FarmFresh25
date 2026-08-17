@@ -140,8 +140,8 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
 //            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
 
 
-        } else if (R.id.nav_dashboard == item.getItemId()) {
-            startActivity(new Intent(Home.this, DashboardActivity.class));
+//        } else if (R.id.nav_dashboard == item.getItemId()) {
+//            startActivity(new Intent(Home.this, DashboardActivity.class));
 
         } else if (R.id.nav_checkout == item.getItemId()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new CheckoutFragment()).commit();

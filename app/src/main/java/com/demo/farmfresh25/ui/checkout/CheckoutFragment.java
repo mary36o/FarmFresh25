@@ -351,6 +351,9 @@ public class CheckoutFragment extends Fragment {
     private void createOrder(String name, String phone, String address,
                              String email, String paymentMethod,
                              String momoNumber, String momoProvider) {
+        String userId = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() != null
+                ? com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid() : "";
+
         // Create order object
         Map<String, Object> order = new HashMap<>();
         order.put("orderId", orderId);
@@ -360,11 +363,13 @@ public class CheckoutFragment extends Fragment {
         order.put("email", email);
         order.put("paymentMethod", paymentMethod);
         order.put("totalAmount", totalAmount);
+        order.put("totalPrice", totalAmount);
         order.put("subtotal", subtotal);
         order.put("discount", discount);
         order.put("deliveryFee", deliveryFee);
         order.put("timestamp", System.currentTimeMillis());
         order.put("status", "Pending");
+        order.put("userId", userId);
         order.put("orderDate", new SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
                 .format(new Date()));
 

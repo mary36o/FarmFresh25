@@ -86,7 +86,8 @@ public class HomeFragment extends Fragment   implements CategoryInterface {
 //        });
 
 
-//        Button2 = binding.actionButton;
+//        Button2 = binding.actionButton;￼
+
 //        Button2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
