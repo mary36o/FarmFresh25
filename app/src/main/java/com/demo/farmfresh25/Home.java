@@ -1,6 +1,7 @@
 package com.demo.farmfresh25;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -36,18 +37,19 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class Home extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
-
-
     ActivityHomeBinding binding;
     Toolbar toolbar;
-
     NavigationView navigationView;
     DrawerLayout drawer;
-
-
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = getSharedPreferences("FarmFreshSettings", MODE_PRIVATE);
+        boolean darkModeEnabled = prefs.getBoolean("dark_mode_enabled", false);
+        AppCompatDelegate.setDefaultNightMode(
+                darkModeEnabled ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
@@ -100,11 +102,12 @@ public class Home extends AppCompatActivity  implements NavigationView.OnNavigat
         if (switchItem != null) {
             Switch darkModeSwitch = switchItem.getActionView().findViewById(R.id.switchDarkMode);
             if (darkModeSwitch != null) {
-                darkModeSwitch.setChecked(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES);
+                darkModeSwitch.setChecked(prefs.getBoolean("dark_mode_enabled", false));
                 darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     AppCompatDelegate.setDefaultNightMode(isChecked
                             ? AppCompatDelegate.MODE_NIGHT_YES
                             : AppCompatDelegate.MODE_NIGHT_NO);
+                    prefs.edit().putBoolean("dark_mode_enabled", isChecked).apply();
                 });
             }
         }
